@@ -19,9 +19,9 @@ const { title } = Astro.props as Props;
     <title>{title}</title>
     <Fonts />
   </head>
-  <body class="bg-light grid grid-cols-12 gap-x-5 px-6">
+  <body class="bg-light text-dark grid grid-cols-12 gap-x-5 px-6">
     <Navigation />
-    <main class="col-start-5 col-end-9">
+    <main class="col-start-5 col-end-9 mt-[150px]">
       <slot></slot>
     </main>
   </body>
