@@ -5,9 +5,9 @@ module.exports = {
     "plugin:vue/vue3-recommended",
     "plugin:astro/recommended",
   ],
-  rules: {
-    "indent": ["error", 2]
-  },
+  // rules: {
+  //   "indent": ["error", 2]
+  // },
   // ...
   overrides: [
     {

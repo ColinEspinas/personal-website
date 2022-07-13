@@ -7,6 +7,7 @@ module.exports = {
       'primary': '#574AE2',
       'primary-1': '#EFF0F7',
       'primary-2': '#E9E8F8',
+      'primary-3': '#857BEA',
       'primary-alpha-1': 'rgba(87, 74, 226, 0.05)',
       'primary-alpha-2': 'rgba(87, 74, 226, 0.1)',
       'accent-1': '#47DCFF',
@@ -32,6 +33,14 @@ module.exports = {
     fontFamily: {
       'display': ['"Space Grotesk"'],
       'sans': ['Inter'],
+    },
+    boxShadow: {
+      'border': '0px 0px 0px 2px theme("colors.primary-2") inset;'
+    },
+    lineHeight: {
+      'inter-buttons': '17px',
+      'inter-compact': '20px',
+      'inter-reading': '26px'
     },
     extend: {},
   },
