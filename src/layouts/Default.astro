@@ -1,5 +1,6 @@
 ---
 import Navigation from '@components/app/Navigation.vue'
+import Fonts from '@components/head/Fonts.astro';
 import { Icon } from 'astro-icon';
 
 export interface Props {
@@ -16,6 +17,7 @@ const { title } = Astro.props as Props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{title}</title>
+    <Fonts></Fonts>
   </head>
   <body class="bg-light grid grid-cols-12 gap-x-5 px-6">
     <Navigation></Navigation>
