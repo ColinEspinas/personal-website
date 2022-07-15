@@ -1,4 +1,5 @@
 ---
+import DashedLines from "@components/app/DashedLines.astro";
 import Navigation from "@components/app/Navigation.astro";
 import Fonts from "@components/head/Fonts.astro";
 import { Icon } from "astro-icon";
@@ -21,8 +22,12 @@ const { title } = Astro.props as Props;
   </head>
   <body class="bg-light text-dark grid grid-cols-12 gap-x-5 px-6">
     <Navigation />
-    <main class="col-start-5 col-end-9 mt-[150px]">
+    <main class="col-start-5 col-end-9 my-[150px]">
+      <DashedLines />
       <slot></slot>
     </main>
+    <script>
+      import "../scripts/sounds.ts";
+    </script>
   </body>
 </html>

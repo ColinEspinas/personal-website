@@ -1,8 +1,63 @@
 ---
+import { Icon } from "astro-icon";
+
+const links = [
+  { name: "Home", icon: "ph:house", to: "/" },
+  { name: "About", icon: "ph:hand-waving", to: "/about" },
+  { name: "Work", icon: "ph:briefcase", to: "/work" },
+  { name: "Writing", icon: "ph:newspaper", to: "/writing" },
+  { name: "Talk with me", icon: "ph:at", to: "/contact" },
+];
+
+const actions = [
+  { name: "Search and commands", icon: "ph:magnifying-glass" },
+  { name: "Switch light/dark mode", icon: "ph:moon" },
+];
+
+const currentPath = Astro.canonicalURL.pathname.slice(0, -1) || "/";
 ---
 
-<nav class="fixed">
-  <ul class="flex">
-    <li>test</li>
+<nav
+  class="fixed top-1/2 left-6 -translate-y-1/2 bg-light shadow-border rounded min-h-[600px] flex flex-col justify-between"
+>
+  <ul class="flex flex-col gap-2 p-2">
+    {links.map((link) => (
+      <li
+        class:list={[
+          { active: currentPath === link.to },
+          "rounded opacity-60 hover:opacity-100 transition-opacity",
+        ]}
+      >
+        <a
+          href={link.to}
+          aria-label={link.name}
+          class="block p-[13px] text-primary"
+        >
+          <Icon name={link.icon} class="icon" />
+        </a>
+      </li>
+    ))}
+  </ul>
+  <ul class="flex flex-col gap-2 p-2">
+    {actions.map((action) => (
+      <li class="rounded opacity-60 hover:opacity-100 transition-opacity">
+        <button aria-label={action.name} class="block p-[13px] text-primary">
+          <Icon name={action.icon} class="icon" />
+        </button>
+      </li>
+    ))}
   </ul>
 </nav>
+
+<style>
+  .active {
+    background-color: theme("backgroundColor.primary-2");
+    opacity: 1;
+  }
+
+  .icon {
+    stroke: theme("stroke.primary");
+    stroke-width: theme("strokeWidth.2");
+    @apply w-[24px];
+  }
+</style>

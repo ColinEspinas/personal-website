@@ -19,7 +19,7 @@ const {
 ---
 
 <a href={to} class:list={["button", type, size]}>
-  {icon && iconBeforeText && <Icon name={icon} class="w-3 h-3 icon" />}
+  {icon && iconBeforeText && <Icon name={icon} class="icon" />}
   <span class="block leading-inter-buttons"><slot></slot></span>
   {icon && !iconBeforeText && <Icon name={icon} class="icon" />}
 </a>
@@ -36,7 +36,7 @@ const {
     font-weight: theme("fontWeight.bold");
     font-size: theme("fontSize.sm");
     border-radius: theme("borderRadius.DEFAULT");
-    transition: all ease-in-out 150ms;
+    @apply transition-all;
   }
 
   .secondary {
