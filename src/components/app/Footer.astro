@@ -1,0 +1,53 @@
+---
+import LinkButton from "./LinkButton.astro";
+
+const links = [
+  [
+    { name: "Home", to: "/" },
+    { name: "About", to: "/about" },
+    { name: "Work", to: "/work" },
+    { name: "Writing", to: "/writing" },
+  ],
+  [
+    { name: "Github", to: "/", target: "_blank" },
+    { name: "Twitter", to: "/", target: "_blank" },
+    { name: "Codepen", to: "/", target: "_blank" },
+    { name: "LinkedIn", to: "/", target: "_blank" },
+  ],
+  [
+    { name: "RSS", to: "/" },
+    { name: "Roadmap", to: "/" },
+    { name: "Statistics", to: "/" },
+    { name: "Talk with me", to: "/contact" },
+  ],
+];
+---
+
+<footer
+  class="border-t-2 border-primary-2 min-h-[300px] row-start-2 col-span-full grid grid-cols-12 gap-x-5 px-6 items-center"
+>
+  <div class="col-start-5 col-end-9 grid grid-cols-4 gap-y-7">
+    {links.map((col) => (
+      <ul class="flex flex-col gap-2 leading-inter-compact">
+        {col.map((link) => (
+          <li class="font-medium text-primary opacity-60 transition-opacity hover:opacity-100">
+            <a href={link.to} target={link.target}>
+              {link.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    ))}
+    <ul class="flex flex-col gap-2">
+      <LinkButton to="/test" type="secondary" icon="ph:sun-bold" iconBeforeText
+        >Mode: Light
+      </LinkButton>
+      <LinkButton to="#" type="secondary" icon="ph:arrow-up-bold"
+        >Go back up
+      </LinkButton>
+    </ul>
+    <p class="row-start-2 col-span-full text-dark-2 text-sm">
+      © 2022 Colin Espinas - All Rights Reserved
+    </p>
+  </div>
+</footer>
