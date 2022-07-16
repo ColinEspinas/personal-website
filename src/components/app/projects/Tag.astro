@@ -1,0 +1,29 @@
+---
+import type Tag from "src/types/tag";
+
+export interface Props {
+  tag: Tag;
+}
+
+const { tag } = Astro.props as Props;
+---
+
+<li
+  class="px-3 py-2 font-semibold text-xs text-dark-2 border-2 border-primary-alpha-1 rounded-pill"
+>
+  <span class="content flex items-center" style={`--tag-color: ${tag.color}`}>
+    {tag.name}
+  </span>
+</li>
+
+<style>
+  .content::before {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    background-color: var(--tag-color, theme("colors.accent-1"));
+    margin-right: theme("spacing.1");
+    border-radius: 100%;
+  }
+</style>
