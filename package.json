@@ -21,6 +21,7 @@
     "vue": "^3.2.37"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.35.4",
     "astro-icon": "^0.7.1",
     "snd-lib": "^1.0.2"
   }

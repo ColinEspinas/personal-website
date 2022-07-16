@@ -31,6 +31,7 @@ module.exports = {
     },
     borderRadius: {
       DEFAULT: '10px',
+      'pill': '100px',
     },
     fontFamily: {
       'display': ['"Space Grotesk"'],

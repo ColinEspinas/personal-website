@@ -1,0 +1,101 @@
+---
+import supabase from "src/scripts/supabase";
+export interface Props {
+  category?: string;
+  count?: number;
+}
+
+const { category, count = 4 } = Astro.props as Props;
+
+const getProjectTags = async (id: number) => {
+  const { data, error } = await supabase
+    .from("project-tags")
+    .select("*")
+    .eq("project", id);
+
+  const { data: tagsData, error: tagsError } = await supabase
+    .from("tags")
+    .select("*")
+    .in(
+      "id",
+      data.map((tag) => tag.id)
+    );
+  return tagsData;
+};
+
+let projects = [];
+
+if (category) {
+  const { data: categoryData, error: categoryError } = await supabase
+    .from("categories")
+    .select("*")
+    .eq("label", category)
+    .single();
+
+  if (!categoryError) {
+    const { data: projectsData, error: projectError } = await supabase
+      .from("projects")
+      .select("id, name, description, link")
+      .eq("category", categoryData.id)
+      .order("date")
+      .limit(count);
+    projects = await Promise.all(
+      projectsData.map(async (project) => {
+        project.tags = await getProjectTags(project.id);
+        return project;
+      })
+    );
+  }
+} else {
+  const { data: projectsData, error: projectError } = await supabase
+    .from("projects")
+    .select("id, name, description, link")
+    .order("date")
+    .limit(count);
+  projects = await Promise.all(
+    projectsData.map(async (project) => {
+      project.tags = await getProjectTags(project.id);
+      return project;
+    })
+  );
+}
+---
+
+<ul role="list" class="grid grid-cols-2 gap-4">
+  {projects.map((project) => (
+    <li>
+      <a
+        href={project.link}
+        class="flex flex-col p-4 border-2 border-primary-2 rounded bg-light hover:bg-primary-1 transition-colors"
+        target="_blank"
+      >
+        <p class="mb-2 font-display font-bold text-2xl">{project.name}</p>
+        <p class="text-dark-1 leading-inter-compact">{project.description}</p>
+        <ul class="flex flex-wrap mt-4">
+          {project.tags.map((tag) => (
+            <li class="px-3 py-2 font-semibold text-xs text-dark-2 border-2 border-primary-alpha-1 rounded-pill">
+              <span
+                class="tag flex items-center"
+                style={`--tag-color: ${tag.color}`}
+              >
+                {tag.name}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .tag::before {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    background-color: var(--tag-color, theme("colors.accent-1"));
+    margin-right: theme("spacing.1");
+    @apply rounded-pill;
+  }
+</style>

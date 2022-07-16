@@ -3,6 +3,7 @@ import Layout from "@layouts/Default.astro";
 import LinkButton from "@components/app/LinkButton.astro";
 import Section from "@components/app/Section.astro";
 import WavyText from "@components/app/WavyText.astro";
+import ProjectList from "@components/app/projects/ProjectList.astro";
 ---
 
 <Layout title="Colin Espinas - Full Stack Web Developer">
@@ -23,8 +24,8 @@ import WavyText from "@components/app/WavyText.astro";
 
   <div class="flex flex-col gap-7">
     <Section title="Latest projects">
-      <ul role="list" class="link-card-grid"></ul>
-      <LinkButton to="/test" type="secondary" icon="ph:arrow-right-bold"
+      <ProjectList />
+      <LinkButton to="/work" type="secondary" icon="ph:arrow-right-bold"
         >See more
       </LinkButton>
     </Section>
