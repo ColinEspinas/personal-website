@@ -2,6 +2,7 @@
 import Layout from "@layouts/Default.astro";
 import LinkButton from "@components/app/LinkButton.astro";
 import Section from "@components/app/Section.astro";
+import ProjectList from "@components/app/projects/ProjectList.astro";
 ---
 
 <Layout title="Work - Colin Espinas - Full Stack Web Developer">
@@ -19,7 +20,10 @@ import Section from "@components/app/Section.astro";
 
   <div class="flex flex-col gap-7">
     <Section title="Latest projects">
-      <ul role="list" class="link-card-grid"></ul>
+      <ProjectList />
+      <LinkButton to="/work" type="secondary" icon="ph:arrow-right-bold"
+        >See more
+      </LinkButton>
     </Section>
     <Section title="Libraries & Frameworks">
       <ul role="list" class="link-card-grid"></ul>
