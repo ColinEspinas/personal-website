@@ -1,0 +1,31 @@
+---
+import Layout from "@layouts/Default.astro";
+import LinkButton from "@components/app/LinkButton.astro";
+import Section from "@components/app/Section.astro";
+---
+
+<Layout title="Work - Colin Espinas - Full Stack Web Developer">
+  <header class="flex flex-col gap-5 mb-7">
+    <h1 class="font-display text-5xl font-bold leading-[61px]">Work</h1>
+    <span class="leading-[30px] text-dark-1">
+      <p>
+        Being an open source enthousiast, I like creating or contributing to
+        tools and apps to make the web more open and accessible.
+      </p>
+      <br />
+      <p>I also like to work on projects related to game development.</p>
+    </span>
+  </header>
+
+  <div class="flex flex-col gap-7">
+    <Section title="Latest projects">
+      <ul role="list" class="link-card-grid"></ul>
+    </Section>
+    <Section title="Libraries & Frameworks">
+      <ul role="list" class="link-card-grid"></ul>
+    </Section>
+    <Section title="Apps & Websites">
+      <ul role="list" class="link-card-grid"></ul>
+    </Section>
+  </div>
+</Layout>

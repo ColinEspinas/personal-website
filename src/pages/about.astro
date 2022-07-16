@@ -1,34 +1,57 @@
 ---
-import Layout from "../layouts/Default.astro";
-import LinkButton from "@components/app/LinkButton.astro";
+import Layout from "@layouts/Default.astro";
+import Section from "@components/app/Section.astro";
 ---
 
-<Layout title="Welcome to Astro.">
-  <header class="flex flex-col gap-5 mb-[150px]">
+<Layout title="About - Colin Espinas - Full Stack Web Developer">
+  <header class="flex flex-col gap-5 mb-7">
     <h1 class="font-display text-5xl font-bold leading-[61px]">
-      <p>Hello,</p><p>I’m Colin Espinas</p>
+      A bit about me
     </h1>
-    <h2 class="font-display text-2xl font-medium leading-[30px] text-dark-2">
-      I am crafting <strong>tools</strong> and <strong>experiences</strong> to make
-      the web more <strong>open</strong>, <strong>accessible</strong>
-      and <strong>beautiful</strong>.
-    </h2>
-
-    <LinkButton to="/about" icon="ph:arrow-right-bold" size="big"
-      >Learn more about me
-    </LinkButton>
+    <p class="leading-[30px] text-dark-1">
+      Hello, I’m an open source enthousiast currently working as a Full Stack
+      Web Developer at Netatmo where I create awesome web experiences for our
+      users and am a student in Web and Mobile Engineering at IIM Digital School
+      in Paris. I strive to make the web more open, accessible and beautiful by
+      crafting tools and experiences for everyone to enjoy.
+    </p>
   </header>
-  <p class="instructions">
-    Check out the <code>src/pages</code> directory to get started.<br />
-    <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-  </p>
 
-  <LinkButton to="/test" icon="ph:arrow-right-bold" iconBeforeText
-    >Send
-  </LinkButton>
-
-  <LinkButton to="/test" type="secondary" icon="ph:arrow-right-bold"
-    >See more
-  </LinkButton>
-  <ul role="list" class="link-card-grid"></ul>
+  <div class="flex flex-col gap-7 ">
+    <Section title="Things I work on">
+      <p class="text-dark-1">
+        Those are the subjects I am the most susceptible to work on and write
+        about.
+      </p>
+      <p class="text-dark-1">
+        I remain open to any experiences outside of those subjects and am always
+        ready to learn more.
+      </p>
+    </Section>
+    <Section title="Technologies I like to work with">
+      <p class="text-dark-1">
+        I don’t like limiting myself to a specific tech stack but here is a
+        non-exhaustive list of technologies I tend to work with.
+      </p>
+      <p class="text-dark-1">
+        I also like to work from scratch and make my own tools when I get the
+        occasion, creating frameworks and libraries is one of my hobbies.
+      </p>
+      <p class="text-dark-1">
+        I am not scared to learn new things as the ecosystem progresses and am
+        always interested by new ideas.
+      </p>
+    </Section>
+    <Section title="Read some of my writing">
+      <ul role="list" class="link-card-grid"></ul>
+    </Section>
+    <Section title="Let’s talk together">
+      <p class="text-dark-1">
+        I am open to conversations, if you have any question about my content,
+        my work or simply want to chat with me you can contact me on various
+        social medias such as Twitter, LinkedIn or GitHub or simply use the form
+        below.
+      </p>
+    </Section>
+  </div>
 </Layout>

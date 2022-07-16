@@ -6,7 +6,7 @@ const links = [
   { name: "About", icon: "ph:hand-waving", to: "/about" },
   { name: "Work", icon: "ph:briefcase", to: "/work" },
   { name: "Writing", icon: "ph:newspaper", to: "/writing" },
-  { name: "Talk with me", icon: "ph:at", to: "/contact" },
+  { name: "Contact", icon: "ph:at", to: "/contact" },
 ];
 
 const actions = [
@@ -18,15 +18,17 @@ const currentPath = Astro.canonicalURL.pathname.slice(0, -1) || "/";
 ---
 
 <nav
-  class="fixed top-1/2 left-6 -translate-y-1/2 bg-light shadow-border rounded min-h-[600px] flex flex-col justify-between"
+  class="fixed top-1/2 left-6 -translate-y-1/2 bg-light shadow-border rounded min-h-[600px] flex flex-col justify-between z-10"
 >
   <ul class="flex flex-col gap-2 p-2">
     {links.map((link) => (
       <li
         class:list={[
           { active: currentPath === link.to },
-          "rounded opacity-60 hover:opacity-100 transition-opacity",
+          "item",
+          "rounded opacity-80 hover:opacity-100 transition-opacity",
         ]}
+        data-name={link.name}
       >
         <a
           href={link.to}
@@ -40,7 +42,10 @@ const currentPath = Astro.canonicalURL.pathname.slice(0, -1) || "/";
   </ul>
   <ul class="flex flex-col gap-2 p-2">
     {actions.map((action) => (
-      <li class="rounded opacity-60 hover:opacity-100 transition-opacity">
+      <li
+        class="item rounded opacity-80 hover:opacity-100 transition-opacity"
+        data-name={action.name}
+      >
         <button aria-label={action.name} class="block p-[13px] text-primary">
           <Icon name={action.icon} class="icon" />
         </button>
@@ -50,6 +55,31 @@ const currentPath = Astro.canonicalURL.pathname.slice(0, -1) || "/";
 </nav>
 
 <style>
+  .item {
+    position: relative;
+  }
+
+  .item::after {
+    position: absolute;
+    left: calc(100% + theme("spacing.2"));
+    top: 50%;
+    width: max-content;
+    transform: translate(calc(theme("spacing.2") * -1), -50%);
+    content: attr(data-name);
+    @apply p-2 ml-2 border-2 border-primary-2 rounded;
+    color: theme("colors.primary");
+    background-color: theme("backgroundColor.light");
+    font-weight: theme("fontWeight.medium");
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 150ms ease, opacity 300ms ease;
+  }
+
+  .item:hover::after {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+
   .active {
     background-color: theme("backgroundColor.primary-2");
     opacity: 1;
