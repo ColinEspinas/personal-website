@@ -10,17 +10,15 @@ const links = [
 ];
 
 const actions = [
-  { name: "Search and commands", icon: "ph:magnifying-glass" },
+  { name: "Search and more", icon: "ph:magnifying-glass" },
   { name: "Switch light/dark mode", icon: "ph:moon" },
 ];
 
 const currentPath = Astro.canonicalURL.pathname.slice(0, -1) || "/";
 ---
 
-<nav
-  class="fixed top-1/2 left-6 -translate-y-1/2 bg-light shadow-border rounded min-h-[600px] flex flex-col justify-between z-10"
->
-  <ul class="flex flex-col gap-2 p-2">
+<nav class="navigation">
+  <ul class="flex md:flex-col gap-2 p-2">
     {links.map((link) => (
       <li
         class:list={[
@@ -40,7 +38,7 @@ const currentPath = Astro.canonicalURL.pathname.slice(0, -1) || "/";
       </li>
     ))}
   </ul>
-  <ul class="flex flex-col gap-2 p-2">
+  <ul class="hidden sm:flex md:flex-col gap-2 p-2">
     {actions.map((action) => (
       <li
         class="item rounded opacity-80 hover:opacity-100 transition-opacity"
@@ -55,18 +53,29 @@ const currentPath = Astro.canonicalURL.pathname.slice(0, -1) || "/";
 </nav>
 
 <style>
+  .navigation {
+    @apply fixed bottom-4 left-0 mx-4 z-10;
+    width: calc(100% - theme("spacing.6"));
+    @apply flex justify-center gap-2;
+    @apply md:top-1/2 md:bottom-auto md:left-6 md:-translate-y-1/2;
+    @apply md:min-h-[600px] md:w-auto;
+    @apply md:flex-col sm:justify-between;
+    @apply bg-light shadow-border rounded;
+  }
+
   .item {
     position: relative;
   }
 
   .item::after {
     position: absolute;
-    left: calc(100% + theme("spacing.2"));
-    top: 50%;
+    @apply left-1/2 bottom-full;
+    @apply md:left-full md:top-1/2 md:bottom-auto;
     width: max-content;
-    transform: translate(calc(theme("spacing.2") * -1), -50%);
+    @apply -translate-x-1/2 translate-y-2;
+    @apply md:-translate-x-2 md:-translate-y-1/2;
     content: attr(data-name);
-    @apply p-2 ml-2 border-2 border-primary-2 rounded;
+    @apply p-2 mb-4 md:ml-4 md:mb-0 border-2 border-primary-2 rounded;
     color: theme("colors.primary");
     background-color: theme("backgroundColor.light");
     font-weight: theme("fontWeight.medium");
@@ -77,7 +86,8 @@ const currentPath = Astro.canonicalURL.pathname.slice(0, -1) || "/";
 
   .item:hover::after {
     opacity: 1;
-    transform: translate(0, -50%);
+    @apply md:-translate-x-1/2 translate-y-0;
+    @apply md:translate-x-0 md:-translate-y-1/2;
   }
 
   .active {

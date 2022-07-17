@@ -1,0 +1,7 @@
+{
+  "dist": "dist/index.html",
+  "dist/about": "dist/about/index.html",
+  "dist/contact": "dist/contact/index.html",
+  "dist/work": "dist/work/index.html",
+  "dist/writing": "dist/writing/index.html"
+}

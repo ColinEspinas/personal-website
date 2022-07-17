@@ -21,15 +21,15 @@ import ProjectList from "@components/app/projects/ProjectList.astro";
   <div class="flex flex-col gap-7">
     <Section title="Latest projects">
       <ProjectList />
-      <LinkButton to="/work" type="secondary" icon="ph:arrow-right-bold"
-        >See more
-      </LinkButton>
     </Section>
     <Section title="Libraries & Frameworks">
-      <ul role="list" class="link-card-grid"></ul>
+      <ProjectList category="libs" />
     </Section>
     <Section title="Apps & Websites">
-      <ul role="list" class="link-card-grid"></ul>
+      <ProjectList category="apps" />
+    </Section>
+    <Section title="Games & Engines">
+      <ProjectList category="games" />
     </Section>
   </div>
 </Layout>

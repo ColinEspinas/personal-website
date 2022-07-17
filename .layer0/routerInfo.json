@@ -1,0 +1,21 @@
+{
+   "location": "routes.ts",
+   "info": [
+      {
+         "criteria": {
+            "method": "match",
+            "path": "/:path*"
+         },
+         "line": 26,
+         "column": 3
+      },
+      {
+         "criteria": {
+            "method": "get",
+            "path": "/:path*/:file.:ext(js|css|png|ico|jpg|gif|svg)"
+         },
+         "line": 10,
+         "column": 3
+      }
+   ]
+}

@@ -13,7 +13,7 @@ export const getProjectTags = async (id: number): Promise<Tag[]> => {
     .select("*")
     .in(
       "id",
-      data.map((tag) => tag.id)
+      data.map((tag) => tag.tag)
     );
   return tagsData as Tag[];
 };
@@ -32,7 +32,7 @@ export const getProjectsByCategory = async (category: string, count: number) => 
     .from("projects")
     .select("id, name, description, link")
     .eq("category", categoryData.id)
-    .order("date")
+    .order("date", { ascending: false })
     .limit(count)
   if (projectError) {
     throw projectError;
@@ -50,7 +50,7 @@ export const getLatestProjects = async (count: number) => {
   const { data: projectsData, error: projectError } = await supabase
     .from("projects")
     .select("id, name, description, link")
-    .order("date")
+    .order("date", { ascending: false })
     .limit(count);
   if (projectError) {
     throw projectError;
