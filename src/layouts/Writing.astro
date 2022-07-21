@@ -1,0 +1,94 @@
+---
+import DashedLines from "@components/app/DashedLines.astro";
+import Footer from "@components/app/Footer.astro";
+import LinkButton from "@components/app/LinkButton.astro";
+import Navigation from "@components/app/Navigation.astro";
+import Fonts from "@components/head/Fonts.astro";
+import { MarkdownContent } from "astro";
+
+export interface Props {
+  content: MarkdownContent;
+}
+
+const { content } = Astro.props as Props;
+
+const readingTime = () => {
+  const text = content.astro.source;
+  const wpm = 265;
+  const words = text.trim().split(/\s+/).length;
+  const time = Math.ceil(words / wpm);
+  return time;
+}
+
+const getFormattedDate = (date: string) => {
+  const [day, month, year] = date.split('/').map(val => parseInt(val));
+  const convertedDate = new Date(year, month - 1, day);
+  const [d, m, y] = [
+    new Intl.DateTimeFormat('en', { month: 'short' }).format(convertedDate),
+    new Intl.DateTimeFormat('en', { day: '2-digit' }).format(convertedDate),
+    new Intl.DateTimeFormat('en', { year: 'numeric' }).format(convertedDate)
+  ];
+  return `${d} ${m}, ${y}`;
+}
+
+content.time = readingTime();
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>{content.title} - Colin Espinas - Full Stack Web Developer</title>
+    <meta name="description" content={content.description}>
+    <Fonts />
+  </head>
+  <body class="bg-light text-dark">
+    <Navigation />
+    <div class="grid grid-cols-12 md:gap-x-5 px-6 relative">
+      <DashedLines />
+      <main id="swup" class="my-[150px]">
+        <article>
+        <header class="flex flex-col gap-5 mb-7">
+          <LinkButton to="/writing" icon="ph:arrow-left-bold" iconBeforeText type="secondary">Back to writing</LinkButton>
+          <h1 class="font-display text-[32px] leading-[40px] font-bold">{content.title}</h1>
+          <span class="leading-inter-buttons font-bold text-dark-1">
+            {getFormattedDate(content.date)} 
+            { content.updated && `(Updated ${getFormattedDate(content.updated)})`}
+             - {content.time} { content.time > 1 ? 'minutes' : 'minute'} read
+          </span>
+        </header>
+      
+        <div class="article flex flex-col gap-[26px]">
+          <slot />
+        </div>
+        <p class="text-dark-1 font-medium text-base leading-inter-reading mt-5">Thanks for reading this writing and have a wonderful day, Colin Espinas.</p>
+      </article>
+      </main>
+    </div>
+    <Footer />
+    <script>
+      import "@scripts/sounds.ts";
+      import "@scripts/swup.ts";
+      import "@scripts/navigation.ts";
+    </script>
+  </body>
+</html>
+
+<style>
+  main {
+    @apply col-start-1 col-end-13;
+    @apply sm:col-start-2 sm:col-end-12;
+    @apply md:col-start-3 md:col-end-11;
+    @apply lg:col-start-4 lg:col-end-10;
+    @apply 2xl:col-start-5 2xl:col-end-9;
+  }
+
+</style>
+
+<style is:global>
+  p {
+    @apply text-base leading-inter-reading;
+  }
+</style>
