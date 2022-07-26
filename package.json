@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^0.2.6",
+    "@astrojs/svelte": "^0.4.1",
     "@astrojs/tailwind": "^0.2.3",
     "@astrojs/vue": "^0.2.1",
     "@swup/a11y-plugin": "^2.0.0",
@@ -21,11 +22,13 @@
     "astro": "^1.0.0-beta.71",
     "prettier": "^2.7.1",
     "prettier-plugin-astro": "^0.1.1",
+    "svelte": "^3.49.0",
     "swup": "^2.0.16",
     "vue": "^3.2.37"
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.35.4",
+    "@swup/scripts-plugin": "^1.1.0",
     "astro-icon": "^0.7.1",
     "snd-lib": "^1.0.2"
   }

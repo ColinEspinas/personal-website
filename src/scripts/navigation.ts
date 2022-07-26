@@ -4,7 +4,7 @@ const navItems = document.querySelectorAll('.navigation .item');
 const navLinkList = document.querySelector('.navigation .links') as HTMLElement;
 
 swup.on('animationInStart', () => {
-  const currentPath = window.location.pathname;
+  const currentPath = "/" + window.location.pathname.split("/")[1];
   navItems.forEach((item, index) => {
     const link = item.querySelector('a');
     if (link) {

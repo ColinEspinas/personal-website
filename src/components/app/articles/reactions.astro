@@ -1,0 +1,10 @@
+---
+import Sticker from "./sticker.svelte";
+
+---
+
+<ul class="flex justify-between">
+{
+  Array.from(Array(5), () => <li><Sticker client:load></Sticker></li>)
+}
+</ul>
