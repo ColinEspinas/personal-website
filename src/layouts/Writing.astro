@@ -4,8 +4,10 @@ import DashedLines from "@components/app/DashedLines.astro";
 import Footer from "@components/app/Footer.astro";
 import LinkButton from "@components/app/LinkButton.astro";
 import Navigation from "@components/app/Navigation.astro";
+import Section from "@components/app/Section.astro";
 import Fonts from "@components/head/Fonts.astro";
 import { MarkdownContent } from "astro";
+import Icon from "astro-icon";
 
 export interface Props {
   content: MarkdownContent;
@@ -33,6 +35,8 @@ const getFormattedDate = (date: string) => {
 }
 
 content.time = readingTime();
+
+const readCount = 1893;
 ---
 
 <!DOCTYPE html>
@@ -66,9 +70,18 @@ content.time = readingTime();
         </div>
         <p class="text-dark-1 font-medium text-base leading-inter-reading mt-5">Thanks for reading this writing and have a wonderful day, Colin Espinas.</p>
       </article>
-      <section class="mt-5">
+      <section class="my-5">
         <Reactions></Reactions>
       </section>
+      <section class="flex items-center gap-1 mb-5">
+        <Icon name="ph:eye-bold" class="h-4 text-primary" /><p>You were the <strong>1639th</strong> to read this writing.</p>
+      </section>
+      <Section title="Continue reading">
+
+      </Section>
+      <Section title="Ask a question">
+
+      </Section>
       </main>
     </div>
     <Footer />
