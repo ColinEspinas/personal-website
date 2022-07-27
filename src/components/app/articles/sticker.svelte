@@ -26,7 +26,7 @@
           ${center.y / 100},
           ${-center.x / 100},
           0,
-          ${Math.log(distance) * 2 * 4}deg
+          ${Math.log(distance) * 2 * 2}deg
         )
         translateZ(0)
       `;
@@ -76,7 +76,7 @@
   }
 
   .sticker:hover > img {
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
   }
 
   .sticker:hover {
@@ -89,10 +89,11 @@
     height: 100%;
     left: 0;
     top: 0;
+    mix-blend-mode: overlay;
     background-image: radial-gradient(
       circle at var(--mx, 50%) var(--my, -20%),
       #ffffff50,
-      #0000000f
+      #0000006f
     );
     mask: url(/images/stickers/sticker_2/sticker_2.png);
     mask-size: cover;
@@ -110,18 +111,11 @@
     height: 100%;
     left: 0;
     top: 0;
-    mix-blend-mode: overlay;
-    background-image: url(/images/stickers/textures/sparkles.gif),
-      radial-gradient(
-        circle at var(--mx, 50%) var(--my, -20%),
-        rgba(255, 0, 0, 1) 0%,
-        rgba(249, 255, 0, 1) 20%,
-        rgb(102, 255, 0) 40%,
-        rgba(0, 241, 255, 1) 80%,
-        rgba(0, 18, 255, 1) 100%
-      );
+    mix-blend-mode: color-dodge;
+    background-image: url(/images/stickers/textures/sparkles.gif);
     background-size: 200%;
     background-position: calc(var(--mx) / 10) calc(var(--my) / 10);
+    background-blend-mode: difference;
     mask: url(/images/stickers/sticker_2/sticker_2_mask_holo.png);
     mask-size: cover;
     opacity: 0;
@@ -129,6 +123,6 @@
   }
 
   .sticker:hover .holo {
-    opacity: 0.6;
+    opacity: 1;
   }
 </style>

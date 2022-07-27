@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../layer0.config.js"],
-  "sourcesContent": ["// This file was automatically added by layer0 init.\n// You should commit this file to source control.\n// Learn more about this file at https://docs.layer0.co/guides/layer0_config\nmodule.exports = {};\n"],
-  "mappings": "AAGA,OAAO,QAAU",
-  "names": []
-}

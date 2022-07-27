@@ -5,6 +5,7 @@ description: My first blog post!
 date: 22/07/2022
 setup: |
   import LinkButton from "../../components/app/LinkButton.astro"
+  import Sticker from "../../components/app/articles/sticker.svelte"
 ---
 
 This is a post written in Markdown.
@@ -15,9 +16,13 @@ Do greatest at in learning steepest. Breakfast extremity suffering one who all o
 
 Now seven world think timed while her. Spoil large oh he rooms on since an. Am up unwilling eagerness perceived incommode. Are not windows set luckily musical hundred can. Collecting if sympathize middletons be of of reasonably. Horrible so kindness at thoughts exercise no weddings subjects. The mrs gay removed towards journey chapter females offered not. Led distrusts otherwise who may newspaper but. Last he dull am none he mile hold as.
 
+<LinkButton>Click to see my new book!</LinkButton>
+
 Be at miss or each good play home they. It leave taste mr in it fancy. She son lose does fond bred gave lady get. Sir her company conduct expense bed any. Sister depend change off piqued one. Contented continued any happiness instantly objection yet her allowance. Use correct day new brought tedious. By come this been in. Kept easy or sons my it done.
 
 Guest it he tears aware as. Make my no cold of need. He been past in by my hard. Warmly thrown oh he common future. Otherwise concealed favourite frankness on be at dashwoods defective at. Sympathize interested simplicity at do projecting increasing terminated. As edward settle limits at in.
+
+<Sticker client:load></Sticker>
 
 So insisted received is occasion advanced honoured. Among ready to which up. Attacks smiling and may out assured moments man nothing outward. Thrown any behind afford either the set depend one temper. Instrument melancholy in acceptance collecting frequently be if. Zealously now pronounce existence add you instantly say offending. Merry their far had widen was. Concerns no in expenses raillery formerly.
 
