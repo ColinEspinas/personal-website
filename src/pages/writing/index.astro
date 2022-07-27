@@ -30,7 +30,7 @@ const posts = await Astro.glob('./**/*.md');
     </Section>
     <Section title="All articles">
       {posts.map((post) => (
-        <a href={post.url}>
+        <a class="text-primary" href={post.url}>
           <h2>{post.frontmatter.title}</h2>
         </a>
       ))}
