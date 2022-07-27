@@ -1,11 +1,11 @@
 import Snd from 'snd-lib';
 
-localStorage.setItem('sounds', 'false');
+localStorage.setItem('sounds', 'true');
 
 const snd = new Snd();
 
 snd.load(Snd.KITS.SND01).then(() => {
-  document.querySelectorAll('.button').forEach((button: HTMLLinkElement) => {
+  document.querySelectorAll('a').forEach((button: HTMLAnchorElement) => {
     button.addEventListener('click', (e) => {
       if (localStorage.sounds === 'true') snd.playButton();
     });
