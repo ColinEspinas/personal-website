@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^0.2.6",
-    "@astrojs/svelte": "^0.4.1",
+    "@astrojs/svelte": "^0.5.0",
     "@astrojs/tailwind": "^0.2.3",
     "@astrojs/vue": "^0.2.1",
     "@swup/a11y-plugin": "^2.0.0",
