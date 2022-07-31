@@ -1,6 +1,6 @@
 import Snd from 'snd-lib';
 
-localStorage.setItem('sounds', 'true');
+localStorage.setItem('sounds', 'false');
 
 const snd = new Snd();
 

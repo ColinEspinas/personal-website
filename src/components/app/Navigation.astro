@@ -14,7 +14,7 @@ const actions = [
   { name: "Switch light/dark mode", icon: "ph:moon" },
 ];
 
-const currentPath = "/" + Astro.canonicalURL.pathname.split("/")[1] || "/";
+const currentPath = "/" + Astro.url.pathname.split("/")[1] || "/";
 const activeIndex = links.findIndex((link) => currentPath === link.to);
 ---
 

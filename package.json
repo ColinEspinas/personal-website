@@ -23,7 +23,7 @@
     "@swup/slide-theme": "^1.0.5",
     "@tailwindcss/line-clamp": "^0.4.0",
     "@typescript-eslint/parser": "^5.30.5",
-    "astro": "^1.0.0-beta.71",
+    "astro": "^1.0.0-rc.3",
     "prettier": "^2.7.1",
     "prettier-plugin-astro": "^0.1.1",
     "svelte": "^3.49.0",
@@ -33,7 +33,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^1.35.4",
     "@swup/scripts-plugin": "^1.1.0",
-    "astro-icon": "^0.7.1",
+    "astro-icon": "^0.7.3",
     "matter-js": "^0.18.0",
     "snd-lib": "^1.0.2",
     "two.js": "^0.8.10"
