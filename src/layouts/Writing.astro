@@ -9,6 +9,8 @@ import Fonts from "@components/head/Fonts.astro";
 import { MarkdownContent } from "astro";
 import Icon from "astro-icon";
 
+import CommandPalette from "@components/app/CommandPalette.svelte";
+
 export interface Props {
   content: MarkdownContent;
 }
@@ -85,6 +87,7 @@ const readCount = 1893;
       </main>
     </div>
     <Footer />
+    <CommandPalette client:load></CommandPalette>
     <script>
       import "@scripts/sounds.ts";
       import "@scripts/swup.ts";
