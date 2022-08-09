@@ -2,39 +2,38 @@
   import { onMount } from "svelte";
 
   let stickerElement;
+  let bounds;
+
+  const rotateToMouse = (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    const leftX = mouseX - bounds.x;
+    const topY = mouseY - bounds.y;
+    const center = {
+      x: leftX - bounds.width / 2,
+      y: topY - bounds.height / 2,
+    };
+    const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
+
+    const mx = center.x * 2 + bounds.width / 2;
+    const my = center.y * 2 + bounds.height / 2;
+
+    stickerElement.style.transform = `
+      scale3d(1.5, 1.5, 1.5)
+      rotate3d(
+        ${center.y / 100},
+        ${-center.x / 100},
+        0,
+        ${Math.log(distance) * 2 * 2}deg
+      )
+      translateZ(0)
+    `;
+
+    stickerElement.style.setProperty("--mx", `${mx}px`);
+    stickerElement.style.setProperty("--my", `${my}px`);
+  };
 
   onMount(() => {
-    let bounds;
-
-    function rotateToMouse(e) {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-      const leftX = mouseX - bounds.x;
-      const topY = mouseY - bounds.y;
-      const center = {
-        x: leftX - bounds.width / 2,
-        y: topY - bounds.height / 2,
-      };
-      const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
-
-      const mx = center.x * 2 + bounds.width / 2;
-      const my = center.y * 2 + bounds.height / 2;
-
-      stickerElement.style.transform = `
-        scale3d(1.5, 1.5, 1.5)
-        rotate3d(
-          ${center.y / 100},
-          ${-center.x / 100},
-          0,
-          ${Math.log(distance) * 2 * 2}deg
-        )
-        translateZ(0)
-      `;
-
-      stickerElement.style.setProperty("--mx", `${mx}px`);
-      stickerElement.style.setProperty("--my", `${my}px`);
-    }
-
     stickerElement.addEventListener("mouseenter", () => {
       bounds = stickerElement.getBoundingClientRect();
       document.addEventListener("mousemove", rotateToMouse);

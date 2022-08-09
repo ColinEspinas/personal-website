@@ -6,24 +6,11 @@ import LinkButton from "@components/app/LinkButton.astro";
 import Navigation from "@components/app/Navigation.astro";
 import Section from "@components/app/Section.astro";
 import Fonts from "@components/head/Fonts.astro";
-import { MarkdownContent } from "astro";
 import Icon from "astro-icon";
 
-import CommandPalette from "@components/app/CommandPalette.svelte";
+const { content, frontmatter } = Astro.props;
 
-export interface Props {
-  content: MarkdownContent;
-}
-
-const { content } = Astro.props as Props;
-
-const readingTime = () => {
-  const text = content.astro.source;
-  const wpm = 265;
-  const words = text.trim().split(/\s+/).length;
-  const time = Math.ceil(words / wpm);
-  return time;
-}
+console.log(content, frontmatter);
 
 const getFormattedDate = (date: string) => {
   const [day, month, year] = date.split('/').map(val => parseInt(val));
@@ -35,10 +22,6 @@ const getFormattedDate = (date: string) => {
   ];
   return `${d} ${m}, ${y}`;
 }
-
-content.time = readingTime();
-
-const readCount = 1893;
 ---
 
 <!DOCTYPE html>
@@ -63,7 +46,7 @@ const readCount = 1893;
           <span class="leading-inter-buttons font-bold text-dark-1">
             {getFormattedDate(content.date)} 
             { content.updated && `(Updated ${getFormattedDate(content.updated)})`}
-             - {content.time} { content.time > 1 ? 'minutes' : 'minute'} read
+             - {content.readingTime} { content.readingTime > 1 ? 'minutes' : 'minute'} read
           </span>
         </header>
       
@@ -87,7 +70,6 @@ const readCount = 1893;
       </main>
     </div>
     <Footer />
-    <CommandPalette client:load></CommandPalette>
     <script>
       import "@scripts/sounds.ts";
       import "@scripts/swup.ts";
