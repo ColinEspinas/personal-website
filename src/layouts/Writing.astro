@@ -10,8 +10,6 @@ import Icon from "astro-icon";
 
 const { content, frontmatter } = Astro.props;
 
-console.log(content, frontmatter);
-
 const getFormattedDate = (date: string) => {
   const [day, month, year] = date.split('/').map(val => parseInt(val));
   const convertedDate = new Date(year, month - 1, day);
