@@ -9,32 +9,32 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^0.2.6",
-    "@astrojs/svelte": "^0.5.0",
-    "@astrojs/tailwind": "^0.2.3",
-    "@astrojs/vue": "^0.2.1",
+    "@astrojs/mdx": "^0.8.3",
+    "@astrojs/sitemap": "^1.0.0",
+    "@astrojs/svelte": "^1.0.0",
+    "@astrojs/tailwind": "^1.0.0",
     "@layer0/cli": "^4.15.7",
     "@layer0/core": "^4.15.7",
     "@layer0/devtools": "^4.15.7",
     "@layer0/prefetch": "^4.15.7",
+    "@tailwindcss/line-clamp": "^0.4.0",
+    "@typescript-eslint/parser": "^5.30.5",
+    "astro": "^1.0.3",
+    "prettier": "^2.7.1",
+    "prettier-plugin-astro": "^0.5.0",
+    "svelte": "^3.49.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^1.35.6",
+    "@swup/scripts-plugin": "^1.1.0",
     "@swup/a11y-plugin": "^2.0.0",
     "@swup/head-plugin": "^1.2.0",
     "@swup/scroll-plugin": "^1.1.1",
     "@swup/slide-theme": "^1.0.5",
-    "@tailwindcss/line-clamp": "^0.4.0",
-    "@typescript-eslint/parser": "^5.30.5",
-    "astro": "^1.0.0-rc.3",
-    "prettier": "^2.7.1",
-    "prettier-plugin-astro": "^0.1.1",
-    "svelte": "^3.49.0",
-    "swup": "^2.0.16",
-    "vue": "^3.2.37"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^1.35.4",
-    "@swup/scripts-plugin": "^1.1.0",
+    "swup": "^2.0.18",
     "astro-icon": "^0.7.3",
     "matter-js": "^0.18.0",
+    "mdast-util-to-string": "^3.1.0",
     "snd-lib": "^1.0.2",
     "two.js": "^0.8.10"
   }
