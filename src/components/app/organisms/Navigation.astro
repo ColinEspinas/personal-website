@@ -1,0 +1,130 @@
+---
+import { Icon } from "astro-icon";
+
+const links = [
+  { name: "Home", icon: "ph:house", to: "/" },
+  { name: "About", icon: "ph:hand-waving", to: "/about" },
+  { name: "Work", icon: "ph:briefcase", to: "/work" },
+  { name: "Writings", icon: "ph:newspaper", to: "/writings" },
+  { name: "Contact", icon: "ph:at", to: "/contact" },
+];
+
+const actions = [
+  { name: "Search and more", icon: "ph:magnifying-glass" },
+  { name: "Switch light/dark mode", icon: "ph:moon" },
+];
+
+const currentPath = "/" + Astro.url.pathname.split("/")[1] || "/";
+let activeIndex = links.findIndex((link) => currentPath === link.to);
+activeIndex = activeIndex > 0 ? activeIndex : 0;
+---
+
+<nav class="navigation">
+  <ul class="links flex lg:flex-col gap-2 p-2 relative">
+    {
+      links.map((link) => (
+        <li
+          class:list={[
+            { active: currentPath === link.to },
+            "item",
+            "rounded opacity-80 hover:opacity-100 transition-opacity",
+          ]}
+          data-name={link.name}
+        >
+          <a
+            href={link.to}
+            aria-label={link.name}
+            class="block p-[13px] text-primary"
+          >
+            <Icon name={link.icon} class="icon" />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <ul class="hidden sm:flex lg:flex-col gap-2 p-2">
+    {
+      actions.map((action) => (
+        <li
+          class="item rounded opacity-80 hover:opacity-100 transition-opacity"
+          data-name={action.name}
+        >
+          <button aria-label={action.name} class="block p-[13px] text-primary">
+            <Icon name={action.icon} class="icon" />
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style define:vars={{ activeIndex }}>
+  .navigation {
+    @apply fixed bottom-4 left-0 mx-4 z-10;
+    width: calc(100% - theme("spacing.6"));
+    @apply flex justify-center gap-2;
+    @apply lg:top-1/2 lg:bottom-auto lg:left-4 lg:-translate-y-1/2;
+    @apply lg:min-h-[600px] lg:w-auto;
+    @apply lg:flex-col sm:justify-between;
+    @apply bg-light shadow-border rounded;
+  }
+
+  .links::before {
+    content: "";
+    position: absolute;
+    @apply w-7 h-7 rounded;
+    background-color: theme("backgroundColor.primary-2");
+    opacity: 1;
+    transform: translateX(
+      calc((100% + theme("spacing.2")) * var(--activeIndex, 0))
+    );
+    @apply transition-transform;
+  }
+
+  @media (min-width: theme("screens.lg")) {
+    .links::before {
+      transform: translateY(
+        calc((100% + theme("spacing.2")) * var(--activeIndex, 0))
+      );
+    }
+  }
+
+  .item {
+    position: relative;
+    @apply transition-colors;
+  }
+
+  .item::after {
+    position: absolute;
+    @apply left-1/2 bottom-full;
+    @apply lg:left-full lg:top-1/2 lg:bottom-auto;
+    width: max-content;
+    @apply -translate-x-1/2 translate-y-2;
+    @apply lg:-translate-x-2 lg:-translate-y-1/2;
+    content: attr(data-name);
+    @apply py-2 px-3 mb-4 lg:ml-4 lg:mb-0 border-2 border-primary-2 rounded;
+    color: theme("colors.primary");
+    background-color: theme("backgroundColor.light");
+    font-weight: theme("fontWeight.medium");
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 150ms ease, opacity 300ms ease;
+  }
+
+  .item:hover::after {
+    opacity: 1;
+    @apply lg:-translate-x-1/2 translate-y-0;
+    @apply lg:translate-x-0 lg:-translate-y-1/2;
+  }
+
+  .active {
+    /* background-color: theme("backgroundColor.primary-2"); */
+    opacity: 1;
+  }
+
+  .icon {
+    stroke: theme("stroke.primary");
+    stroke-width: theme("strokeWidth.2");
+    @apply w-[24px];
+  }
+</style>

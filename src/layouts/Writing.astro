@@ -1,25 +1,26 @@
 ---
-import Reactions from "@components/app/articles/reactions.astro";
-import DashedLines from "@components/app/DashedLines.astro";
-import Footer from "@components/app/Footer.astro";
-import LinkButton from "@components/app/LinkButton.astro";
-import Navigation from "@components/app/Navigation.astro";
-import Section from "@components/app/Section.astro";
+import Reactions from "@components/app/molecules/reactions.astro";
+import DashedLines from "@components/app/atoms/DashedLines.astro";
+import Footer from "@components/app/organisms/Footer.astro";
+import LinkButton from "@components/app/atoms/LinkButton.astro";
+import Navigation from "@components/app/organisms/Navigation.astro";
+import Section from "@components/app/atoms/Section.astro";
 import Fonts from "@components/head/Fonts.astro";
 import Icon from "astro-icon";
+import WritingColumns from "@components/app/molecules/WritingColumns.astro";
 
-const { content, frontmatter } = Astro.props;
+const { content } = Astro.props;
 
 const getFormattedDate = (date: string) => {
-  const [day, month, year] = date.split('/').map(val => parseInt(val));
+  const [day, month, year] = date.split("/").map((val) => parseInt(val));
   const convertedDate = new Date(year, month - 1, day);
   const [d, m, y] = [
-    new Intl.DateTimeFormat('en', { month: 'short' }).format(convertedDate),
-    new Intl.DateTimeFormat('en', { day: '2-digit' }).format(convertedDate),
-    new Intl.DateTimeFormat('en', { year: 'numeric' }).format(convertedDate)
+    new Intl.DateTimeFormat("en", { month: "short" }).format(convertedDate),
+    new Intl.DateTimeFormat("en", { day: "2-digit" }).format(convertedDate),
+    new Intl.DateTimeFormat("en", { year: "numeric" }).format(convertedDate),
   ];
   return `${d} ${m}, ${y}`;
-}
+};
 ---
 
 <!DOCTYPE html>
@@ -29,66 +30,75 @@ const getFormattedDate = (date: string) => {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{content.title} - Colin Espinas - Full Stack Web Developer</title>
-    <meta name="description" content={content.description}>
+    <meta name="description" content={content.description} />
     <Fonts />
   </head>
   <body class="bg-light text-dark">
     <Navigation />
-    <div class="grid grid-cols-12 md:gap-x-5 px-6 relative">
+    <div class="flex justify-center px-6 relative">
       <DashedLines />
-      <main id="swup" class="my-[150px]">
+      <main
+        id="swup"
+        class="flex flex-col w-full max-w-[600px] my-[150px] gap-7"
+      >
         <article>
-        <header class="flex flex-col gap-5 mb-7">
-          <LinkButton to="/writing" icon="ph:arrow-left-bold" iconBeforeText type="secondary">Back to writing</LinkButton>
-          <h1 class="font-display text-[32px] leading-[40px] font-bold">{content.title}</h1>
-          <span class="leading-inter-buttons font-bold text-dark-1">
-            {getFormattedDate(content.date)} 
-            { content.updated && `(Updated ${getFormattedDate(content.updated)})`}
-             - {content.readingTime} { content.readingTime > 1 ? 'minutes' : 'minute'} read
-          </span>
-        </header>
-      
-        <div class="article flex flex-col gap-[26px]">
-          <slot />
-        </div>
-        <p class="text-dark-1 font-medium text-base leading-inter-reading mt-5">Thanks for reading this writing and have a wonderful day, Colin Espinas.</p>
-      </article>
-      <section class="my-5">
-        <Reactions></Reactions>
-      </section>
-      <section class="flex items-center gap-1 mb-5">
-        <Icon name="ph:eye-bold" class="h-4 text-primary" /><p>You were the <strong>1639th</strong> to read this writing.</p>
-      </section>
-      <Section title="Continue reading">
+          <header class="flex flex-col gap-5 mb-7">
+            <LinkButton
+              to="/writings"
+              icon="ph:arrow-left-bold"
+              iconBeforeText
+              type="secondary"
+              >Back to writings
+            </LinkButton>
+            <h1 class="font-display text-[32px] leading-[40px] font-bold">
+              {content.title}
+            </h1>
+            <span
+              class="leading-inter-buttons font-bold text-dark-1 text-[14px]"
+            >
+              {getFormattedDate(content.date)}
+              {
+                content.updated &&
+                `(Updated ${getFormattedDate(content.updated)})`
+              }
+              - {content.readingTime}
+              {content.readingTime > 1 ? "minutes" : "minute"} read
+            </span>
+          </header>
 
-      </Section>
-      <Section title="Ask a question">
-
-      </Section>
+          <div class="article flex flex-col gap-[26px]">
+            <slot />
+          </div>
+          <p
+            class="text-dark-1 font-medium text-base leading-inter-reading mt-5"
+          >
+            Thanks for reading this writing and have a wonderful day, Colin.
+          </p>
+        </article>
+        <!-- <section>
+          <Reactions />
+        </section> -->
+        <section class="flex items-center gap-1">
+          <Icon name="ph:eye-bold" class="h-4 text-primary" /><p>
+            You were the <strong>1639th</strong> to read this writing.
+          </p>
+        </section>
+        <Section title="Continue reading">
+          <WritingColumns />
+        </Section>
+        <Section title="Ask a question" />
       </main>
     </div>
     <Footer />
     <script>
-      import "@scripts/sounds.ts";
       import "@scripts/swup.ts";
       import "@scripts/navigation.ts";
     </script>
+
+    <style is:global>
+      .article p {
+        @apply text-base leading-inter-reading;
+      }
+    </style>
   </body>
 </html>
-
-<style>
-  main {
-    @apply col-start-1 col-end-13;
-    @apply sm:col-start-2 sm:col-end-12;
-    @apply md:col-start-3 md:col-end-11;
-    @apply lg:col-start-4 lg:col-end-10;
-    @apply 2xl:col-start-5 2xl:col-end-9;
-  }
-
-</style>
-
-<style is:global>
-  .article p {
-    @apply text-base leading-inter-reading;
-  }
-</style>

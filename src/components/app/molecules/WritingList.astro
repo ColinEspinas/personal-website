@@ -1,0 +1,41 @@
+---
+import { getWritingTags } from "src/api/writings";
+import type Writing from "src/types/writing";
+import WritingItem from "./WritingItem.astro";
+
+export interface Props {
+  featured?: boolean;
+  count?: number;
+}
+
+const { featured, count } = Astro.props as Props;
+
+const writingsMDX = await Astro.glob("../../../pages/writings/**/*.mdx");
+
+const convertToDate = (date: string) => {
+  const [day, month, year] = date.split("/").map((val) => parseInt(val));
+  return new Date(year, month - 1, day);
+};
+
+const writings: Writing[] = await Promise.all(
+  writingsMDX
+    .filter((writing) => (featured ? writing.frontmatter.featured : true))
+    .filter((_, index) => (count ? index < count : true))
+    .sort(
+      (a, b) =>
+        convertToDate(b.frontmatter.date).getTime() -
+        convertToDate(a.frontmatter.date).getTime()
+    )
+    .map(async (writing) => ({
+      id: writing.frontmatter.id,
+      tags: await getWritingTags(writing.frontmatter.id),
+      title: writing.frontmatter.title,
+      description: writing.frontmatter.description,
+      link: writing.url,
+    }))
+);
+---
+
+<ul role="list" class="flex flex-col gap-4">
+  {writings.map((writing) => <WritingItem writing={writing} />)}
+</ul>

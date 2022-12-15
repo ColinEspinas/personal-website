@@ -20,7 +20,7 @@ const {
 
 <a href={to} class:list={["button", type, size]}>
   {icon && iconBeforeText && <Icon name={icon} class="icon" />}
-  <span class="block leading-inter-buttons"><slot></slot></span>
+  <span class="block leading-inter-buttons"><slot /></span>
   {icon && !iconBeforeText && <Icon name={icon} class="icon" />}
 </a>
 
