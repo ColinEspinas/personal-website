@@ -1,13 +1,14 @@
 ---
 import Sticker from "./sticker.svelte";
-
 ---
 
 <ul class="flex justify-between">
-{
-  Array.from(Array(5), () => <li class="flex flex-col items-center gap-2">
-    <Sticker client:load></Sticker>
-    <span class="text-dark-2 font-bold">5</span>
-  </li>)
-}
+  {
+    Array.from(Array(5), () => (
+      <li class="flex flex-col items-center gap-2">
+        <Sticker client:load />
+        <span class="text-dark-2 font-bold">5</span>
+      </li>
+    ))
+  }
 </ul>

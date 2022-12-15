@@ -25,28 +25,24 @@ const { title } = Astro.props as Props;
   </head>
   <body class="bg-light text-dark">
     <Navigation />
-    <div class="grid grid-cols-12 md:gap-x-5 px-6 relative">
+    <div class="flex justify-center px-6 relative">
       <DashedLines />
       <main id="swup" class="my-[150px]">
-        <slot></slot>
+        <slot />
       </main>
     </div>
     <Footer />
-    <CommandPalette client:load></CommandPalette>
     <script>
-      import "@scripts/sounds.ts";
       import "@scripts/swup.ts";
       import "@scripts/navigation.ts";
     </script>
+
+    <style>
+      main {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+      }
+    </style>
   </body>
 </html>
-
-<style>
-  main {
-    @apply col-start-1 col-end-13;
-    @apply sm:col-start-2 sm:col-end-12;
-    @apply md:col-start-3 md:col-end-11;
-    @apply lg:col-start-4 lg:col-end-10;
-    @apply 2xl:col-start-5 2xl:col-end-9;
-  }
-</style>

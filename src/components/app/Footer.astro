@@ -29,17 +29,19 @@ const links = [
   <div
     class="wrapper grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 my-6 mb-[150px] 2xl:my-0 gap-y-7"
   >
-    {links.map((col) => (
-      <ul class="flex flex-col gap-2 leading-inter-compact">
-        {col.map((link) => (
-          <li class="font-medium text-primary opacity-80 transition-opacity hover:opacity-100">
-            <a href={link.to} target={link.target}>
-              {link.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-    ))}
+    {
+      links.map((col) => (
+        <ul class="flex flex-col gap-2 leading-inter-compact">
+          {col.map((link) => (
+            <li class="font-medium text-primary opacity-80 transition-opacity hover:opacity-100">
+              <a href={link.to} target={link.target}>
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      ))
+    }
     <div class="flex flex-col gap-2">
       <LinkButton to="/test" type="secondary" icon="ph:sun-bold" iconBeforeText
         >Mode: Light
