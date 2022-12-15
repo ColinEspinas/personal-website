@@ -34,7 +34,7 @@ const links = [
         <ul class="flex flex-col gap-2 leading-inter-compact">
           {col.map((link) => (
             <li class="font-medium text-primary opacity-80 transition-opacity hover:opacity-100">
-              <a href={link.to} target={link.target}>
+              <a href={link.to} target={link.target} data-swup-preload>
                 {link.name}
               </a>
             </li>

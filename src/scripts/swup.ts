@@ -3,6 +3,7 @@ import SwupA11yPlugin from '@swup/a11y-plugin';
 import SwupHeadPlugin from '@swup/head-plugin';
 import SwupScrollPlugin from '@swup/scroll-plugin';
 import SwupScriptsPlugin from '@swup/scripts-plugin';
+import SwupPreloadPlugin from '@swup/preload-plugin';
 
 import SwupSlideTheme from '@swup/slide-theme';
 
@@ -18,6 +19,7 @@ const swup = new Swup({
       doScrollingRightAway: true,
       animateScroll: false,
     }),
+    new SwupPreloadPlugin()
   ],
 });
 

@@ -18,7 +18,7 @@ const {
 } = Astro.props as Props;
 ---
 
-<a href={to} class:list={["button", type, size]}>
+<a href={to} class:list={["button", type, size]} data-swup-preload>
   {icon && iconBeforeText && <Icon name={icon} class="icon" />}
   <span class="block leading-inter-buttons"><slot /></span>
   {icon && !iconBeforeText && <Icon name={icon} class="icon" />}
