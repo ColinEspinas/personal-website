@@ -1,0 +1,29 @@
+---
+import { getWritingTags } from "src/api/writings";
+import type Writing from "src/types/writing";
+import WritingItem from "./WritingItem.astro";
+
+export interface Props {
+  featured?: boolean;
+}
+
+const { featured } = Astro.props as Props;
+
+const writingsMDX = await Astro.glob("../../../pages/writings/**/*.mdx");
+
+const writings: Writing[] = await Promise.all(
+  writingsMDX
+    .filter((writing) => (featured ? writing.frontmatter.featured : true))
+    .map(async (writing) => ({
+      id: writing.frontmatter.id,
+      tags: await getWritingTags(writing.frontmatter.id),
+      title: writing.frontmatter.title,
+      description: writing.frontmatter.description,
+      link: writing.url,
+    }))
+);
+---
+
+<ul role="list" class="flex gap-4">
+  {writings.map((writing) => <WritingItem writing={writing} />)}
+</ul>

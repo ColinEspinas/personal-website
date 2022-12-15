@@ -6,7 +6,7 @@ const links = [
     { name: "Home", to: "/" },
     { name: "About", to: "/about" },
     { name: "Work", to: "/work" },
-    { name: "Writing", to: "/writing" },
+    { name: "Writings", to: "/writings" },
   ],
   [
     { name: "Github", to: "/", target: "_blank" },
@@ -24,10 +24,10 @@ const links = [
 ---
 
 <footer
-  class="relative border-t-2 border-primary-2 min-h-[300px] row-start-2 col-span-full grid grid-cols-12 gap-x-5 px-6 items-center"
+  class="relative flex justify-center items-center border-t-2 border-primary-2 min-h-[300px] px-6"
 >
   <div
-    class="wrapper grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 my-6 mb-[150px] 2xl:my-0 gap-y-7"
+    class="w-full max-w-[600px] grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 my-6 mb-[150px] 2xl:my-0 gap-y-7"
   >
     {
       links.map((col) => (
@@ -55,13 +55,3 @@ const links = [
     </p>
   </div>
 </footer>
-
-<style>
-  .wrapper {
-    @apply col-start-1 col-end-13;
-    @apply sm:col-start-2 sm:col-end-12;
-    @apply md:col-start-3 md:col-end-11;
-    @apply lg:col-start-4 lg:col-end-10;
-    @apply 2xl:col-start-5 2xl:col-end-9;
-  }
-</style>

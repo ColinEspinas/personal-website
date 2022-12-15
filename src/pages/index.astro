@@ -3,7 +3,8 @@ import Layout from "@layouts/Default.astro";
 import LinkButton from "@components/app/atoms/LinkButton.astro";
 import Section from "@components/app/atoms/Section.astro";
 import WavyText from "@components/app/atoms/WavyText.astro";
-import ProjectList from "@components/app/projects/ProjectList.astro";
+import ProjectList from "@components/app/molecules/ProjectList.astro";
+import WritingList from "@components/app/molecules/WritingList.astro";
 ---
 
 <Layout title="Colin Espinas - Full Stack Web Developer">
@@ -29,9 +30,10 @@ import ProjectList from "@components/app/projects/ProjectList.astro";
         >See more
       </LinkButton>
     </Section>
-    <Section title="Featured articles">
-      <LinkButton to="/writing" type="secondary" icon="ph:arrow-right-bold"
-        >Read all articles
+    <Section title="Featured writings">
+      <WritingList featured />
+      <LinkButton to="/writings" type="secondary" icon="ph:arrow-right-bold"
+        >Read all writings
       </LinkButton>
     </Section>
   </div>

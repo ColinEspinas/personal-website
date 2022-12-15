@@ -11,7 +11,10 @@ const { tag } = Astro.props as Props;
 <li
   class="px-3 py-2 font-semibold text-xs text-dark-2 border-2 border-primary-alpha-1 rounded-pill"
 >
-  <span class="content flex items-center" style={`--tag-color: ${tag.color}`}>
+  <span
+    class="content flex items-center leading-[0] my-1"
+    style={`--tag-color: ${tag.color}`}
+  >
     {tag.name}
   </span>
 </li>

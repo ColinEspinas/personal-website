@@ -5,7 +5,7 @@ const links = [
   { name: "Home", icon: "ph:house", to: "/" },
   { name: "About", icon: "ph:hand-waving", to: "/about" },
   { name: "Work", icon: "ph:briefcase", to: "/work" },
-  { name: "Writing", icon: "ph:newspaper", to: "/writing" },
+  { name: "Writings", icon: "ph:newspaper", to: "/writings" },
   { name: "Contact", icon: "ph:at", to: "/contact" },
 ];
 
@@ -15,7 +15,8 @@ const actions = [
 ];
 
 const currentPath = "/" + Astro.url.pathname.split("/")[1] || "/";
-const activeIndex = links.findIndex((link) => currentPath === link.to);
+let activeIndex = links.findIndex((link) => currentPath === link.to);
+activeIndex = activeIndex > 0 ? activeIndex : 0;
 ---
 
 <nav class="navigation">

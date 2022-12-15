@@ -1,0 +1,24 @@
+---
+import type Writing from "src/types/writing";
+import Card from "../atoms/Card.astro";
+import Tag from "../atoms/Tag.astro";
+
+export interface Props {
+  writing: Writing;
+}
+
+const { writing } = Astro.props as Props;
+---
+
+<li class="w-full">
+  <a href={writing.link} class="" target="_blank" title={writing.description}>
+    <Card>
+      <h3 class="mb-2 font-display font-bold text-xl line-clamp-3">
+        {writing.title}
+      </h3>
+      <ul class="flex flex-wrap gap-2 mt-auto">
+        {writing.tags.map((tag) => <Tag tag={tag} />)}
+      </ul>
+    </Card>
+  </a>
+</li>

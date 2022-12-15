@@ -7,6 +7,7 @@ import Navigation from "@components/app/organisms/Navigation.astro";
 import Section from "@components/app/atoms/Section.astro";
 import Fonts from "@components/head/Fonts.astro";
 import Icon from "astro-icon";
+import WritingColumns from "@components/app/molecules/WritingColumns.astro";
 
 const { content } = Astro.props;
 
@@ -36,15 +37,18 @@ const getFormattedDate = (date: string) => {
     <Navigation />
     <div class="flex justify-center px-6 relative">
       <DashedLines />
-      <main id="swup" class="my-[150px]">
+      <main
+        id="swup"
+        class="flex flex-col w-full max-w-[600px] my-[150px] gap-7"
+      >
         <article>
           <header class="flex flex-col gap-5 mb-7">
             <LinkButton
-              to="/writing"
+              to="/writings"
               icon="ph:arrow-left-bold"
               iconBeforeText
               type="secondary"
-              >Back to writing
+              >Back to writings
             </LinkButton>
             <h1 class="font-display text-[32px] leading-[40px] font-bold">
               {content.title}
@@ -71,15 +75,17 @@ const getFormattedDate = (date: string) => {
             Thanks for reading this writing and have a wonderful day, Colin.
           </p>
         </article>
-        <section class="my-5">
+        <section>
           <Reactions />
         </section>
-        <section class="flex items-center gap-1 mb-5">
+        <section class="flex items-center gap-1">
           <Icon name="ph:eye-bold" class="h-4 text-primary" /><p>
             You were the <strong>1639th</strong> to read this writing.
           </p>
         </section>
-        <Section title="Continue reading" />
+        <Section title="Continue reading">
+          <WritingColumns />
+        </Section>
         <Section title="Ask a question" />
       </main>
     </div>
@@ -88,14 +94,6 @@ const getFormattedDate = (date: string) => {
       import "@scripts/swup.ts";
       import "@scripts/navigation.ts";
     </script>
-
-    <style>
-      main {
-        position: relative;
-        width: 100%;
-        max-width: 600px;
-      }
-    </style>
 
     <style is:global>
       .article p {
