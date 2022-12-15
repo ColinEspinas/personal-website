@@ -1,10 +1,9 @@
 ---
 import Layout from "@layouts/Default.astro";
-import LinkButton from "@components/app/LinkButton.astro";
-import Section from "@components/app/Section.astro";
-import WavyText from "@components/app/WavyText.astro";
+import LinkButton from "@components/app/atoms/LinkButton.astro";
+import Section from "@components/app/atoms/Section.astro";
 
-const posts = await Astro.glob('./**/*.mdx');
+const posts = await Astro.glob("./**/*.mdx");
 ---
 
 <Layout title="Writing - Colin Espinas - Full Stack Web Developer">
@@ -29,11 +28,13 @@ const posts = await Astro.glob('./**/*.mdx');
       <ul role="list" class="link-card-grid"></ul>
     </Section>
     <Section title="All articles">
-      {posts.map((post) => (
-        <a class="text-primary" href={post.url}>
-          <h2>{post.frontmatter.title}</h2>
-        </a>
-      ))}
+      {
+        posts.map((post) => (
+          <a class="text-primary" href={post.url}>
+            <h2>{post.frontmatter.title}</h2>
+          </a>
+        ))
+      }
       <ul role="list" class="link-card-grid"></ul>
     </Section>
   </div>
