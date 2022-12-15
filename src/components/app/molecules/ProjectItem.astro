@@ -11,13 +11,7 @@ const { project } = Astro.props as Props;
 ---
 
 <li>
-  <a
-    href={project.link}
-    class=""
-    target="_blank"
-    title={project.description}
-    data-swup-preload
-  >
+  <a href={project.link} class="" target="_blank" title={project.description}>
     <Card>
       <h3 class="mb-2 font-display font-bold text-2xl">{project.name}</h3>
       <p class="text-dark-1 leading-inter-compact line-clamp-2 mb-4">
