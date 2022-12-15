@@ -20,7 +20,7 @@ const convertToDate = (date: string) => {
 const writings: Writing[] = await Promise.all(
   writingsMDX
     .filter((writing) => (featured ? writing.frontmatter.featured : true))
-    .filter((writing, index) => (count ? index < count : true))
+    .filter((_, index) => (count ? index < count : true))
     .sort(
       (a, b) =>
         convertToDate(b.frontmatter.date).getTime() -

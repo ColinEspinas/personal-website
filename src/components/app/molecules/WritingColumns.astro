@@ -24,6 +24,6 @@ const writings: Writing[] = await Promise.all(
 );
 ---
 
-<ul role="list" class="flex gap-4">
+<ul role="list" class="flex flex-col sm:flex-row gap-4">
   {writings.map((writing) => <WritingItem writing={writing} />)}
 </ul>
