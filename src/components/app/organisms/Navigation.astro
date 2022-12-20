@@ -10,8 +10,8 @@ const links = [
 ];
 
 const actions = [
-  { name: "Search and more", icon: "ph:magnifying-glass" },
-  { name: "Switch light/dark mode", icon: "ph:moon" },
+  { id: "commands", name: "Search and more", icon: "ph:magnifying-glass" },
+  { id: "theme-switch", name: "Switch light/dark mode", icon: "ph:moon" },
 ];
 
 const currentPath = "/" + Astro.url.pathname.split("/")[1] || "/";
@@ -50,7 +50,11 @@ activeIndex = activeIndex > 0 ? activeIndex : 0;
           class="item rounded opacity-80 hover:opacity-100 transition-opacity"
           data-name={action.name}
         >
-          <button aria-label={action.name} class="block p-[13px] text-primary">
+          <button
+            id={action.id}
+            aria-label={action.name}
+            class="block p-[13px] text-primary"
+          >
             <Icon name={action.icon} class="icon" />
           </button>
         </li>
@@ -58,6 +62,14 @@ activeIndex = activeIndex > 0 ? activeIndex : 0;
     }
   </ul>
 </nav>
+
+<script>
+  import "@scripts/navigation.ts";
+
+  document.getElementById("theme-switch").addEventListener("click", () => {
+    document.querySelector("html").classList.toggle("dark");
+  });
+</script>
 
 <style define:vars={{ activeIndex }}>
   .navigation {

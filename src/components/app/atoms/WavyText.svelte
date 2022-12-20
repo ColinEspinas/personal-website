@@ -7,7 +7,7 @@
     position: relative;
   }
 
-  .wavy::before {
+  .wavy::after {
     content: "";
     position: absolute;
     top: 0;

@@ -2,6 +2,7 @@
 
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}'],
+  darkMode: 'class',
   theme: {
     colors: {
       'primary': '#574AE2',

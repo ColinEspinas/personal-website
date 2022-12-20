@@ -2,15 +2,16 @@
 import Layout from "@layouts/Default.astro";
 import LinkButton from "@components/app/atoms/LinkButton.astro";
 import Section from "@components/app/atoms/Section.astro";
-import WavyText from "@components/app/atoms/WavyText.astro";
 import ProjectList from "@components/app/molecules/ProjectList.astro";
 import WritingList from "@components/app/molecules/WritingList.astro";
+import HomeWavyText from "@components/app/molecules/HomeWavyText.svelte";
 ---
 
 <Layout title="Colin Espinas - Full Stack Web Developer">
   <header class="flex flex-col gap-5 mb-[150px]">
     <h1 class="font-display text-5xl font-bold leading-[61px]">
-      <p>Hello,</p><p>I’m <WavyText>Colin Espinas</WavyText></p>
+      <p>Hello,</p>
+      <p>I'm&nbsp;<HomeWavyText client:load /></p>
     </h1>
     <p class="font-display text-2xl font-medium leading-[30px] text-dark-2">
       I love crafting <strong>tools</strong> and <strong>experiences</strong> to
