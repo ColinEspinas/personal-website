@@ -9,32 +9,26 @@
   let room;
   let roomId = "main";
 
-  // let myPresence;
+  let lastCursorPosition;
   let others;
 
   onMount(() => {
-    // Create a Liveblocks client
-    // Replace this key with your public key provided at
-    // https://liveblocks.io/dashboard/projects/{projectId}/apikeys
-    client = createClient({
-      publicApiKey:
-        "pk_dev_i5EKJHiYBrhx0MzytNZA-K9Dwj5QTAvvCGf71slWYZk5rFrmia3y9z10y9ZB5IDD",
-    });
+    let scroll = {
+      x: window.scrollX,
+      y: window.scrollY,
+    };
 
     try {
+      client = createClient({
+        publicApiKey:
+          "pk_dev_i5EKJHiYBrhx0MzytNZA-K9Dwj5QTAvvCGf71slWYZk5rFrmia3y9z10y9ZB5IDD",
+      });
       room = client.enter("main", { initialPresence: {} });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
 
-    // myPresence = room.getPresence();
     others = room.getOthers();
-
-    // Subscribe to further changes
-
-    // room.subscribe("my-presence", (presence) => {
-    //   myPresence = presence;
-    // });
 
     room.subscribe("others", (otherUsers) => {
       others = otherUsers;
@@ -43,28 +37,51 @@
 
     document.addEventListener("pointermove", (event) => {
       event.preventDefault();
-      console.log("move");
       if (room) {
-        const cursor = {
+        const cursorPosition = {
           x: Math.round(event.pageX),
           y: Math.round(event.pageY),
         };
+        lastCursorPosition = cursorPosition;
         room.updatePresence({
-          cursor,
+          cursor: {
+            x: cursorPosition.x / window.innerWidth,
+            y: cursorPosition.y,
+          },
         });
-        console.log(cursor);
       }
     });
 
     document.addEventListener("pointerleave", () => {
-      if (room)
+      if (room) {
+        lastCursorPosition = null;
         room.updatePresence({
           cursor: null,
         });
+      }
+    });
+
+    document.addEventListener("scroll", () => {
+      if (lastCursorPosition) {
+        const offsetX = window.scrollX - scroll.x;
+        const offsetY = window.scrollY - scroll.y;
+        const position = {
+          x: lastCursorPosition.x + offsetX,
+          y: lastCursorPosition.y + offsetY,
+        };
+        lastCursorPosition = position;
+        room.updatePresence({
+          cursor: {
+            x: position.x / window.innerWidth,
+            y: position.y,
+          },
+        });
+      }
+      scroll.x = window.scrollX;
+      scroll.y = window.scrollY;
     });
   });
 
-  // Unsubscribe when unmounting
   onDestroy(() => {
     if (client && room) {
       client.leave(roomId);
@@ -72,13 +89,13 @@
   });
 </script>
 
-<div class="absolute top-0 left-0">
+<div class="absolute top-0 left-0 h-full w-full overflow-hidden">
   {#if others}
     {#each [...others] as { connectionId, presence } (connectionId)}
       {#if presence?.cursor}
         <Cursor
           color={COLORS[connectionId % COLORS.length]}
-          x={presence.cursor.x}
+          x={presence.cursor.x * window.innerWidth}
           y={presence.cursor.y}
         >
           <slot />
