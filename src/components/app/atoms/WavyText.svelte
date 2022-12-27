@@ -1,6 +1,4 @@
-<span class="wavy">
-  <slot />
-</span>
+<span class="wavy"><slot /></span>
 
 <style>
   .wavy {

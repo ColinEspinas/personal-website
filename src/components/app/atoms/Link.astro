@@ -1,0 +1,32 @@
+---
+import { Icon } from "astro-icon";
+
+export interface Props {
+  to: string;
+  icon?: string;
+  iconBeforeText?: boolean;
+}
+
+const { to, icon, iconBeforeText } = Astro.props as Props;
+
+const isExternal = to.startsWith("https://");
+---
+
+<a
+  href={to}
+  target={isExternal ? "_blank" : "_self"}
+  class="text-primary"
+  data-swup-preload
+  >{icon && iconBeforeText && <Icon name={icon} class="icon" />}<slot />{
+    icon && !iconBeforeText && <Icon name={icon} class="icon" />
+  }
+</a>
+
+<style>
+  .icon {
+    display: inline;
+    stroke: theme("stroke.light");
+    stroke-width: theme("strokeWidth.2");
+    @apply w-3 h-3 ml-1 mb-1;
+  }
+</style>

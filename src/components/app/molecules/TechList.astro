@@ -1,0 +1,41 @@
+---
+import { Icon } from "astro-icon";
+import Card from "../atoms/Card.astro";
+import Link from "../atoms/Link.astro";
+
+const techs = [
+  { name: "Vue", icon: "simple-icons:vuedotjs", link: "https://vuejs.org/" },
+  { name: "Nuxt", icon: "simple-icons:nuxtdotjs", link: "https://nuxt.com/" },
+  { name: "Svelte", icon: "simple-icons:svelte", link: "https://svelte.dev/" },
+  { name: "React", icon: "simple-icons:react", link: "https://reactjs.org/" },
+  { name: "Next", icon: "simple-icons:nextdotjs", link: "https://nextjs.org/" },
+  { name: "Astro", icon: "simple-icons:astro", link: "https://astro.build/" },
+  {
+    name: "Directus",
+    icon: "simple-icons:directus",
+    link: "https://directus.io/",
+  },
+  {
+    name: "Tailwind",
+    icon: "simple-icons:tailwindcss",
+    link: "https://tailwindcss.com/",
+  },
+];
+---
+
+<Card clickable={false}>
+  <ul class="flex items-end justify-center gap-5 flex-wrap">
+    {
+      techs.map((tech) => (
+        <li>
+          <Link to={tech.link}>
+            <span class="flex flex-col items-center">
+              <Icon name={tech.icon} class="text-dark w-5 h-5" />
+              <span class="font-bold text-sm mt-2">{tech.name}</span>
+            </span>
+          </Link>
+        </li>
+      ))
+    }
+  </ul>
+</Card>

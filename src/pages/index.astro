@@ -9,7 +9,7 @@ import HomeWavyText from "@components/app/molecules/HomeWavyText.svelte";
 
 <Layout title="Colin Espinas - Full Stack Web Developer">
   <header class="flex flex-col gap-5 mb-[150px]">
-    <h1 class="font-display text-5xl font-bold leading-[61px]">
+    <h1 class="title">
       <p>Hello,</p>
       <p>I'm&nbsp;<HomeWavyText client:load /></p>
     </h1>
@@ -39,3 +39,9 @@ import HomeWavyText from "@components/app/molecules/HomeWavyText.svelte";
     </Section>
   </div>
 </Layout>
+
+<style>
+  .title > p {
+    @apply font-display text-5xl font-bold leading-[61px];
+  }
+</style>

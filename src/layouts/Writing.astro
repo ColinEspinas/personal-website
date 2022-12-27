@@ -59,7 +59,7 @@ const getFormattedDate = (date: string) => {
               {getFormattedDate(content.date)}
               {
                 content.updated &&
-                `(Updated ${getFormattedDate(content.updated)})`
+                  `(Updated ${getFormattedDate(content.updated)})`
               }
               - {content.readingTime}
               {content.readingTime > 1 ? "minutes" : "minute"} read
@@ -96,7 +96,7 @@ const getFormattedDate = (date: string) => {
     </script>
 
     <style is:global>
-      .article p {
+      p {
         @apply text-base leading-inter-reading;
       }
     </style>

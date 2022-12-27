@@ -33,5 +33,10 @@ const { title } = Astro.props as Props;
     <script>
       import "@scripts/swup.ts";
     </script>
+    <style is:global>
+      p {
+        @apply text-base leading-inter-reading;
+      }
+    </style>
   </body>
 </html>
