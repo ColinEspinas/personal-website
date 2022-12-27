@@ -1,8 +1,10 @@
 ---
 import DashedLines from "@components/app/atoms/DashedLines.astro";
+import Cursors from "@components/app/molecules/Cursors.svelte";
 import Footer from "@components/app/organisms/Footer.astro";
 import Navigation from "@components/app/organisms/Navigation.astro";
 import Fonts from "@components/head/Fonts.astro";
+import { Icon } from "astro-icon";
 
 export interface Props {
   title?: string;
@@ -26,6 +28,9 @@ const { title } = Astro.props as Props;
     <Fonts />
   </head>
   <body class="bg-light text-dark">
+    <Cursors client:only
+      ><Icon name="ph:cursor-fill" class="text-primary-alpha-2 h-4 w-4" />
+    </Cursors>
     <Navigation />
     <div class="flex justify-center px-6 relative">
       <DashedLines />
