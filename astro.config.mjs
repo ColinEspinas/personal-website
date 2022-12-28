@@ -7,6 +7,7 @@ import { remarkReadingTime } from './src/plugins/remark/reading-time.mjs';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolink from 'rehype-autolink-headings';
 import compress from "astro-compress";
+import purgecss from "astro-purgecss";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,7 +17,7 @@ export default defineConfig({
       behavior: 'wrap'
     }]],
     remarkPlugins: [remarkReadingTime]
-  }), compress()],
+  }), purgecss(), compress()],
   markdown: {
     shikiConfig: {
       theme: 'css-variables'
