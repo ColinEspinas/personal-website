@@ -20,8 +20,7 @@
 
     try {
       client = createClient({
-        publicApiKey:
-          "pk_dev_i5EKJHiYBrhx0MzytNZA-K9Dwj5QTAvvCGf71slWYZk5rFrmia3y9z10y9ZB5IDD",
+        publicApiKey: import.meta.env.PUBLIC_LIVEBLOCKS_KEY,
       });
       room = client.enter("main", { initialPresence: {} });
     } catch (err) {
