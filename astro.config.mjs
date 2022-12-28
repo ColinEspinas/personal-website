@@ -8,6 +8,8 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolink from 'rehype-autolink-headings';
 import compress from "astro-compress";
 
+import critters from "astro-critters";
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://colinespinas.com',
@@ -16,7 +18,7 @@ export default defineConfig({
       behavior: 'wrap'
     }]],
     remarkPlugins: [remarkReadingTime]
-  }), compress()],
+  }), critters(), compress()],
   markdown: {
     shikiConfig: {
       theme: 'css-variables'
