@@ -6,9 +6,10 @@ import WritingItem from "./WritingItem.astro";
 export interface Props {
   featured?: boolean;
   count?: number;
+  year?: number;
 }
 
-const { featured, count } = Astro.props as Props;
+const { featured, count, year = -1 } = Astro.props as Props;
 
 const writingsMDX = await Astro.glob("../../../pages/writings/**/*.mdx");
 
@@ -19,6 +20,11 @@ const convertToDate = (date: string) => {
 
 const writings: Writing[] = await Promise.all(
   writingsMDX
+    .filter(
+      (writing) =>
+        year === -1 ||
+        convertToDate(writing.frontmatter.date).getFullYear() === year
+    )
     .filter((writing) => (featured ? writing.frontmatter.featured : true))
     .filter((_, index) => (count ? index < count : true))
     .sort(

@@ -8,8 +8,10 @@ import Section from "@components/app/atoms/Section.astro";
 import Fonts from "@components/head/Fonts.astro";
 import Icon from "astro-icon";
 import WritingColumns from "@components/app/molecules/WritingColumns.astro";
+import { getWritingTags } from "src/api/writings";
+import Tag from "@components/app/atoms/Tag.astro";
 
-const { content } = Astro.props;
+const { content, frontmatter } = Astro.props;
 
 const getFormattedDate = (date: string) => {
   const [day, month, year] = date.split("/").map((val) => parseInt(val));
@@ -21,6 +23,8 @@ const getFormattedDate = (date: string) => {
   ];
   return `${d} ${m}, ${y}`;
 };
+
+const tags = await getWritingTags(frontmatter.id);
 ---
 
 <!DOCTYPE html>
@@ -39,7 +43,7 @@ const getFormattedDate = (date: string) => {
       <DashedLines />
       <main
         id="swup"
-        class="flex flex-col w-full max-w-[600px] my-[150px] gap-7"
+        class="flex flex-col w-full max-w-[600px] mb-[150px] mt-6 sm:mt-[150px] gap-7"
       >
         <article>
           <header class="flex flex-col gap-5 mb-7">
@@ -64,6 +68,9 @@ const getFormattedDate = (date: string) => {
               - {content.readingTime}
               {content.readingTime > 1 ? "minutes" : "minute"} read
             </span>
+            <ul class="flex flex-wrap gap-2 mt-auto">
+              {tags.map((tag) => <Tag tag={tag} />)}
+            </ul>
           </header>
 
           <div class="article flex flex-col gap-[26px]">

@@ -3,6 +3,13 @@ import Layout from "@layouts/Default.astro";
 import LinkButton from "@components/app/atoms/LinkButton.astro";
 import Section from "@components/app/atoms/Section.astro";
 import WritingList from "@components/app/molecules/WritingList.astro";
+
+const now = new Date();
+const minYear = 2022;
+const diff = now.getFullYear() - minYear + 1;
+const yearsFrom2022ToNow = new Array(diff)
+  .fill(0)
+  .map((_, index) => now.getFullYear() - index);
 ---
 
 <Layout title="Writings">
@@ -27,7 +34,14 @@ import WritingList from "@components/app/molecules/WritingList.astro";
       <WritingList featured />
     </Section>
     <Section title="All">
-      <WritingList />
+      {
+        yearsFrom2022ToNow.map((year) => (
+          <>
+            <h3 class="font-bold text-dark-1">{year}</h3>
+            <WritingList year={year} />
+          </>
+        ))
+      }
     </Section>
   </div>
 </Layout>
