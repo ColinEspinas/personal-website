@@ -92,11 +92,7 @@
   {#if others}
     {#each [...others] as { connectionId, presence } (connectionId)}
       {#if presence?.cursor}
-        <Cursor
-          color={COLORS[connectionId % COLORS.length]}
-          x={presence.cursor.x * window.innerWidth}
-          y={presence.cursor.y}
-        >
+        <Cursor x={presence.cursor.x * window.innerWidth} y={presence.cursor.y}>
           <slot />
         </Cursor>
       {/if}
