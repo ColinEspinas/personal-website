@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 87 74 226;
+    --color-primary-1: 239 240 247;
+    --color-primary-2: 233 232 248;
+    --color-primary-3: 133 123 234;
+    --color-primary-alpha-1: rgba(87, 74, 226, 0.05);
+    --color-primary-alpha-2: rgba(87, 74, 226, 0.1);
+    --color-accent-1: 71 220 255;
+    --color-accent-2: 248 74 167;
+    --color-dark: 42 43 46;
+    --color-dark-1: 78 80 86;
+    --color-dark-2: 107 109 118;
+    --color-light: 248 249 249;
+    --color-light-1: 244 246 246;
+    --color-light-2: 233 236 236;
+  }
+
+  :root.dark {
+    --color-primary: 87 74 226;
+    --color-primary-1: 239 240 247;
+    --color-primary-2: 233 232 248;
+    --color-primary-3: 133 123 234;
+    --color-primary-alpha-1: rgba(87, 74, 226, 0.05);
+    --color-primary-alpha-2: rgba(87, 74, 226, 0.1);
+    --color-accent-1: 71 220 255;
+    --color-accent-2: 248 74 167;
+    --color-dark: 248 249 249;
+    --color-dark-1: 244 246 246;
+    --color-dark-2: 233 236 236;
+    --color-light: 42 43 46;
+    --color-light-1: 78 80 86;
+    --color-light-2: 107 109 118;
+  }
+}
