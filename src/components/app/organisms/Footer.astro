@@ -25,6 +25,8 @@ const links = [
     { name: "Contact", to: "/contact" },
   ],
 ];
+
+const currentYear = new Date().getFullYear();
 ---
 
 <footer
@@ -58,8 +60,11 @@ const links = [
         >Go back up
       </LinkButton>
     </div>
-    <p class="2xl:row-start-2 col-span-full font-medium text-dark-2 text-sm">
-      © 2022 Colin Espinas - All Rights Reserved
+    <p
+      class="2xl:row-start-2 col-span-full font-medium text-dark-2 text-sm"
+      id="copyright-text"
+    >
+      © {currentYear} Colin Espinas - All Rights Reserved
     </p>
   </div>
 </footer>
