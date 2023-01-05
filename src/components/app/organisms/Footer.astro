@@ -1,4 +1,5 @@
 ---
+import ActionButton from "../atoms/ActionButton.astro";
 import LinkButton from "../atoms/LinkButton.astro";
 
 const links = [
@@ -53,9 +54,13 @@ const currentYear = new Date().getFullYear();
       ))
     }
     <div class="flex flex-col gap-2">
-      <LinkButton to="/" type="secondary" icon="ph:sun-bold" iconBeforeText
-        >Mode: Light
-      </LinkButton>
+      <ActionButton
+        id="footer-theme-switch"
+        type="secondary"
+        icon="ph:sun-bold"
+        iconBeforeText
+        ><span id="theme-state">Mode: Light</span>
+      </ActionButton>
       <LinkButton to="#" type="secondary" icon="ph:arrow-up-bold" iconBeforeText
         >Go back up
       </LinkButton>
@@ -68,3 +73,16 @@ const currentYear = new Date().getFullYear();
     </p>
   </div>
 </footer>
+
+<script>
+  import { toggleDarkMode, isDarkModeActive } from "@scripts/theme";
+
+  document
+    .getElementById("footer-theme-switch")
+    .addEventListener("click", () => {
+      toggleDarkMode();
+      document.getElementById("theme-state").textContent = `Mode: ${
+        isDarkModeActive() ? "Dark" : "Light"
+      }`;
+    });
+</script>

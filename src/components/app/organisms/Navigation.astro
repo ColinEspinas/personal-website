@@ -10,7 +10,7 @@ const links = [
 ];
 
 const actions = [
-  { id: "commands", name: "Search and more", icon: "ph:magnifying-glass" },
+  // { id: "commands", name: "Search and more", icon: "ph:magnifying-glass" },
   { id: "theme-switch", name: "Switch light/dark mode", icon: "ph:moon" },
 ];
 
@@ -64,10 +64,11 @@ activeIndex = activeIndex > 0 ? activeIndex : 0;
 </nav>
 
 <script>
-  import "@scripts/navigation.ts";
+  import "@scripts/navigation";
+  import { toggleDarkMode, isDarkModeActive } from "@scripts/theme";
 
   document.getElementById("theme-switch").addEventListener("click", () => {
-    document.querySelector("html").classList.toggle("dark");
+    toggleDarkMode();
   });
 </script>
 

@@ -1,0 +1,87 @@
+---
+import { Icon } from "astro-icon";
+
+export interface Props {
+  id?: string;
+  name?: string;
+  actionType?: "button" | "submit" | "reset";
+  type?: "primary" | "secondary";
+  size?: "default" | "big";
+  icon?: string;
+  iconBeforeText?: boolean;
+}
+
+const {
+  id,
+  name,
+  actionType = "button",
+  type = "primary",
+  size = "default",
+  icon,
+  iconBeforeText = false,
+} = Astro.props as Props;
+---
+
+<button
+  id={id}
+  name={name}
+  class:list={["button", type, size]}
+  type={actionType}
+>
+  {icon && iconBeforeText && <Icon name={icon} class="icon" />}
+  <span class="block leading-inter-buttons"><slot /></span>
+  {icon && !iconBeforeText && <Icon name={icon} class="icon" />}
+</button>
+
+<style>
+  .button {
+    display: flex;
+    column-gap: theme("gap.1");
+    width: max-content;
+    align-items: center;
+    padding: theme("padding.2") theme("padding.3");
+    background-color: theme("backgroundColor.primary");
+    color: theme("colors.light");
+    font-weight: theme("fontWeight.bold");
+    font-size: theme("fontSize.sm");
+    border-radius: theme("borderRadius.DEFAULT");
+    @apply transition-all;
+  }
+
+  .secondary {
+    background-color: theme("backgroundColor.light");
+    color: theme("colors.primary");
+    box-shadow: theme("boxShadow.border");
+  }
+
+  .big {
+    font-size: theme("fontSize.base");
+    padding: theme("padding.3") theme("padding.4");
+  }
+
+  .icon {
+    stroke: theme("stroke.light");
+    stroke-width: theme("strokeWidth.2");
+    @apply w-3 h-3;
+  }
+
+  .secondary .icon {
+    stroke: theme("stroke.primary");
+  }
+
+  .big .icon {
+    @apply w-4 h-4;
+  }
+
+  .button:hover {
+    background-color: theme("backgroundColor.primary-3");
+  }
+
+  .secondary:hover {
+    background-color: theme("backgroundColor.primary-1");
+  }
+
+  .big:hover {
+    column-gap: theme("gap.2");
+  }
+</style>
