@@ -15,7 +15,7 @@ const isExternal = to.startsWith("https://");
 <a
   href={to}
   target={isExternal ? "_blank" : "_self"}
-  class="text-primary border-transparent border-b-2 hover:border-primary-2 transition-colors"
+  class="link"
   data-swup-preload={!isExternal}
   >{icon && iconBeforeText && <Icon name={icon} class="icon" />}<slot />{
     icon && !iconBeforeText && <Icon name={icon} class="icon" />
@@ -23,6 +23,9 @@ const isExternal = to.startsWith("https://");
 >
 
 <style>
+  .link {
+    @apply text-primary border-transparent border-b-2 hover:border-primary-2 transition-colors;
+  }
   .icon {
     display: inline;
     stroke: theme("stroke.light");
