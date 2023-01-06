@@ -4,12 +4,25 @@ import LinkButton from "@components/app/atoms/LinkButton.astro";
 import Section from "@components/app/atoms/Section.astro";
 import WritingList from "@components/app/molecules/WritingList.astro";
 
+const convertToDate = (date: string) => {
+  const [day, month, year] = date.split("/").map((val) => parseInt(val));
+  return new Date(year, month - 1, day);
+};
+
+const writingsMDX = await Astro.glob("./**/*.mdx");
+
 const now = new Date();
 const minYear = 2022;
 const diff = now.getFullYear() - minYear + 1;
 const yearsFrom2022ToNow = new Array(diff)
   .fill(0)
-  .map((_, index) => now.getFullYear() - index);
+  .map((_, index) => now.getFullYear() - index)
+  .filter((year) =>
+    writingsMDX.some(
+      (writing) =>
+        convertToDate(writing.frontmatter.date).getFullYear() === year
+    )
+  );
 ---
 
 <Layout title="Writings">

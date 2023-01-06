@@ -15,12 +15,12 @@ const isExternal = to.startsWith("https://");
 <a
   href={to}
   target={isExternal ? "_blank" : "_self"}
-  class="text-primary"
+  class="text-primary border-transparent border-b-2 hover:border-primary-2 transition-colors"
   data-swup-preload={!isExternal}
   >{icon && iconBeforeText && <Icon name={icon} class="icon" />}<slot />{
     icon && !iconBeforeText && <Icon name={icon} class="icon" />
-  }
-</a>
+  }</a
+>
 
 <style>
   .icon {
