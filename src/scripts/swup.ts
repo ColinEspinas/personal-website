@@ -7,7 +7,7 @@ import SwupPreloadPlugin from '@swup/preload-plugin';
 
 import SwupSlideTheme from '@swup/slide-theme';
 
-const swup = new Swup({
+const enableSwup = () => new Swup({
   plugins: [
     new SwupA11yPlugin(),
     new SwupHeadPlugin(),
@@ -21,6 +21,21 @@ const swup = new Swup({
     }),
     new SwupPreloadPlugin()
   ],
+});
+
+const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+let swup = mediaQuery.matches ? null : enableSwup();
+
+mediaQuery.addEventListener('change', () => {
+  if (mediaQuery.matches) {
+    // Reduce motion = true
+    swup?.destroy()
+  }
+  else {
+    // Reduce motion = false
+    if (!swup) swup = enableSwup()
+  }
 });
 
 export default swup;
