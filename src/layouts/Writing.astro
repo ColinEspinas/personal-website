@@ -53,7 +53,8 @@ const tags = await getWritingTags(frontmatter.id);
               icon="ph:arrow-left-bold"
               iconBeforeText
               type="secondary"
-              >Back to writings
+            >
+              Back to writings
             </LinkButton>
             <h1 class="font-display text-[32px] leading-[40px] font-bold">
               {content.title}
@@ -100,7 +101,6 @@ const tags = await getWritingTags(frontmatter.id);
     <Footer />
     <script>
       import "@scripts/swup.ts";
-      import "@scripts/navigation.ts";
     </script>
 
     <style is:global>

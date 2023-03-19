@@ -39,7 +39,7 @@ export const getProjectsByCategory = async (category: string, count: number) => 
   }
 
   return Promise.all(
-    projectsData.map(async (project) => {
+    projectsData.map(async (project: Project) => {
       project.tags = await getProjectTags(project.id);
       return project;
     }) as Promise<Project>[]
@@ -57,7 +57,7 @@ export const getLatestProjects = async (count: number) => {
   }
 
   return Promise.all(
-    projectsData.map(async (project) => {
+    projectsData.map(async (project: Project) => {
       project.tags = await getProjectTags(project.id);
       return project;
     }) as Promise<Project>[]
