@@ -10,6 +10,8 @@ import Icon from "astro-icon";
 import WritingColumns from "@components/app/molecules/WritingColumns.astro";
 import { getWritingTags } from "src/api/writings";
 import Tag from "@components/app/atoms/Tag.astro";
+import Link from "@components/app/atoms/Link.astro";
+import ContactForm from "@components/app/molecules/ContactForm.astro";
 
 const { content, frontmatter } = Astro.props;
 
@@ -95,7 +97,21 @@ const tags = await getWritingTags(frontmatter.id);
         <Section title="Continue reading">
           <WritingColumns />
         </Section>
-        <Section title="Ask a question" />
+        <Section title="Ask a question">
+          <p class="text-dark-1">
+            I am open to conversations, if you have any question about my
+            content, my work or simply want to chat with me you can contact me
+            on various social medias such as <Link
+              to="https://twitter.com/call_innn"
+            >
+              Twitter
+            </Link>, <Link to="https://www.linkedin.com/in/colin-espinas/">
+              LinkedIn
+            </Link>, <Link to="https://github.com/ColinEspinas">GitHub</Link> or
+            simply use the form below.
+          </p>
+          <ContactForm />
+        </Section>
       </main>
     </div>
     <Footer />

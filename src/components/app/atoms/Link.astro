@@ -17,7 +17,8 @@ const isExternal = to.startsWith("https://");
   target={isExternal ? "_blank" : "_self"}
   class="link"
   data-swup-preload={!isExternal}
-  >{icon && iconBeforeText && <Icon name={icon} class="icon" />}<slot />{
+>
+  {icon && iconBeforeText && <Icon name={icon} class="icon" />}<slot />{
     icon && !iconBeforeText && <Icon name={icon} class="icon" />
   }</a
 >
