@@ -12,6 +12,7 @@ import { getWritingTags } from "src/api/writings";
 import Tag from "@components/app/atoms/Tag.astro";
 import Link from "@components/app/atoms/Link.astro";
 import ContactForm from "@components/app/molecules/ContactForm.astro";
+import SkipLink from "@components/app/molecules/SkipLink.astro";
 
 const { content, frontmatter } = Astro.props;
 
@@ -41,78 +42,81 @@ const tags = await getWritingTags(frontmatter.id);
     <Fonts />
   </head>
   <body class="bg-light text-dark">
+    <SkipLink />
     <Navigation />
     <div class="flex justify-center px-6 relative">
       <DashedLines />
-      <main
-        id="swup"
-        class="flex flex-col w-full max-w-[600px] mb-[150px] mt-6 sm:mt-[150px] gap-7"
-      >
-        <article>
-          <header class="flex flex-col gap-5 mb-7">
-            <LinkButton
-              to="/writings"
-              icon="ph:arrow-left-bold"
-              iconBeforeText
-              type="secondary"
-            >
-              Back to writings
-            </LinkButton>
-            <h1 class="font-display text-[32px] leading-[40px] font-bold">
-              {content.title}
-            </h1>
-            <span
-              class="leading-inter-buttons font-bold text-dark-1 text-[14px]"
-            >
-              {getFormattedDate(content.date)}
-              {
-                content.updated &&
-                  `(Updated ${getFormattedDate(content.updated)})`
-              }
-              - {content.readingTime}
-              {content.readingTime > 1 ? "minutes" : "minute"} read
-            </span>
-            <ul class="flex flex-wrap gap-2 mt-auto">
-              {tags.map((tag) => <Tag tag={tag} />)}
-            </ul>
-          </header>
+      <div id="swup">
+        <main
+          id="main"
+          class="flex flex-col w-full max-w-[600px] mb-[150px] mt-6 sm:mt-[150px] gap-7"
+        >
+          <article>
+            <header class="flex flex-col gap-5 mb-7">
+              <LinkButton
+                to="/writings"
+                icon="ph:arrow-left-bold"
+                iconBeforeText
+                type="secondary"
+              >
+                Back to writings
+              </LinkButton>
+              <h1 class="font-display text-[32px] leading-[40px] font-bold">
+                {content.title}
+              </h1>
+              <span
+                class="leading-inter-buttons font-bold text-dark-1 text-[14px]"
+              >
+                {getFormattedDate(content.date)}
+                {
+                  content.updated &&
+                    `(Updated ${getFormattedDate(content.updated)})`
+                }
+                - {content.readingTime}
+                {content.readingTime > 1 ? "minutes" : "minute"} read
+              </span>
+              <ul class="flex flex-wrap gap-2 mt-auto">
+                {tags.map((tag) => <Tag tag={tag} />)}
+              </ul>
+            </header>
 
-          <div class="article flex flex-col gap-[26px]">
-            <slot />
-          </div>
-          <p
-            class="text-dark-1 font-medium text-base leading-inter-reading mt-5"
-          >
-            Thanks for reading this writing and have a wonderful day, Colin.
-          </p>
-        </article>
-        <!-- <section>
+            <div class="article flex flex-col gap-[26px]">
+              <slot />
+            </div>
+            <p
+              class="text-dark-1 font-medium text-base leading-inter-reading mt-5"
+            >
+              Thanks for reading this writing and have a wonderful day, Colin.
+            </p>
+          </article>
+          <!-- <section>
           <Reactions />
         </section> -->
-        <section class="flex items-center gap-1">
-          <Icon name="ph:eye-bold" class="h-4 text-primary" /><p>
-            You were the <strong>1639th</strong> to read this writing.
-          </p>
-        </section>
-        <Section title="Continue reading">
-          <WritingColumns />
-        </Section>
-        <Section title="Ask a question">
-          <p class="text-dark-1">
-            I am open to conversations, if you have any question about my
-            content, my work or simply want to chat with me you can contact me
-            on various social medias such as <Link
-              to="https://twitter.com/call_innn"
-            >
-              Twitter
-            </Link>, <Link to="https://www.linkedin.com/in/colin-espinas/">
-              LinkedIn
-            </Link>, <Link to="https://github.com/ColinEspinas">GitHub</Link> or
-            simply use the form below.
-          </p>
-          <ContactForm />
-        </Section>
-      </main>
+          <section class="flex items-center gap-1">
+            <Icon name="ph:eye-bold" class="h-4 text-primary" /><p>
+              You were the <strong>1639th</strong> to read this writing.
+            </p>
+          </section>
+          <Section title="Continue reading">
+            <WritingColumns />
+          </Section>
+          <Section title="Ask a question">
+            <p class="text-dark-1">
+              I am open to conversations, if you have any question about my
+              content, my work or simply want to chat with me you can contact me
+              on various social medias such as <Link
+                to="https://twitter.com/call_innn"
+              >
+                Twitter
+              </Link>, <Link to="https://www.linkedin.com/in/colin-espinas/">
+                LinkedIn
+              </Link>, <Link to="https://github.com/ColinEspinas">GitHub</Link> or
+              simply use the form below.
+            </p>
+            <ContactForm />
+          </Section>
+        </main>
+      </div>
     </div>
     <Footer />
     <script>

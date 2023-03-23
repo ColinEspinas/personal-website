@@ -36,4 +36,8 @@
     --color-light-1: 78 80 86;
     --color-light-2: 107 109 118;
   }
+
+  *:focus-visible {
+    @apply outline-dashed outline-primary outline-2 outline-offset-2;
+  }
 }
