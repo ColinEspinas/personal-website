@@ -65,6 +65,7 @@ activeIndex = activeIndex > 0 ? activeIndex : 0;
 
 <script>
   // import { toggleDarkMode, isDarkModeActive } from "@scripts/theme";
+  import swup from "@scripts/swup";
 
   // document.getElementById("theme-switch").addEventListener("click", () => {
   //   toggleDarkMode();
@@ -82,6 +83,19 @@ activeIndex = activeIndex > 0 ? activeIndex : 0;
       item.classList.add("active");
       navItems.forEach((e) => e.querySelector("a")?.classList.remove("active"));
       navLinkList.style.setProperty("--activeIndex", ifActiveIndex);
+    });
+  });
+
+  swup.on("willReplaceContent", () => {
+    const currentPath = "/" + window.location.pathname.split("/")[1];
+    navItems.forEach((item, index) => {
+      const link = item.querySelector("a");
+      if (link) {
+        const isLinkActive = new URL(link.href).pathname === currentPath;
+        item.classList.toggle("active", isLinkActive);
+        if (isLinkActive)
+          navLinkList.style.setProperty("--activeIndex", index.toString());
+      }
     });
   });
 </script>
