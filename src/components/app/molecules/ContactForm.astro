@@ -3,16 +3,36 @@ import ActionButton from "@components/app/atoms/ActionButton.astro";
 import TextInput from "@components/app/atoms/TextInput.astro";
 ---
 
-<form action="" class="flex flex-col gap-4">
+<form class="flex flex-col gap-4" id="contact-form">
   <div class="flex gap-4 w-full">
     <div class="w-3/5">
-      <TextInput placeholder="Enter your name" />
+      <TextInput placeholder="Enter your name" name="name" />
     </div>
-    <TextInput placeholder="Enter your email" />
+    <TextInput placeholder="Enter your email" name="email" type="email" />
   </div>
   <div class="h-[140px]">
-    <TextInput textArea placeholder="Enter your message" />
+    <TextInput textArea placeholder="Enter your message" name="message" />
   </div>
+  <!-- Honeypot -->
+  <div class="hidden">
+    Please do not touch the following field, this is a honeypot for bots and
+    spammers.
+    <input
+      type="checkbox"
+      name="phone-number"
+      value="1"
+      class="hidden"
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </div>
+  <p class="text-accent-2 hidden" id="contact-error-message">
+    An error has occured, please try submitting again.
+  </p>
+  <p class="text-primary hidden" id="contact-success-message">
+    Your message was sent with success! I'll get back to you as soon as
+    possible.
+  </p>
   <ActionButton
     type="primary"
     actionType="submit"
@@ -22,3 +42,42 @@ import TextInput from "@components/app/atoms/TextInput.astro";
     Send
   </ActionButton>
 </form>
+
+<script>
+  import { sendContactMessage } from "@api/contact";
+
+  const contactForm = document.getElementById(
+    "contact-form"
+  ) as HTMLFormElement;
+
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const name = (
+      contactForm.querySelector('input[name="name"]') as HTMLInputElement
+    ).value;
+    const email = (
+      contactForm.querySelector('input[name="email"]') as HTMLInputElement
+    ).value;
+    const message = (
+      contactForm.querySelector(
+        'textarea[name="message"]'
+      ) as HTMLTextAreaElement
+    ).value;
+    if (
+      (
+        contactForm.querySelector(
+          'input[name="phone-number"]'
+        ) as HTMLInputElement
+      ).value === "1"
+    ) {
+      const { data, error } = await sendContactMessage(name, email, message);
+      document
+        .getElementById("contact-error-message")
+        .classList.toggle("hidden", !error);
+
+      document
+        .getElementById("contact-success-message")
+        .classList.toggle("hidden", !!error);
+    }
+  });
+</script>

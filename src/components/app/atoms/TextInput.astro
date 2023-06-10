@@ -1,15 +1,29 @@
 ---
 export interface Props {
   type?: astroHTML.JSX.HTMLInputTypeAttribute;
+  name: string;
   placeholder?: string;
   textArea?: boolean;
 }
 
-const { type = "text", placeholder, textArea = false } = Astro.props as Props;
+const {
+  type = "text",
+  placeholder,
+  textArea = false,
+  name,
+} = Astro.props as Props;
 ---
 
-{!textArea && <input type={type} placeholder={placeholder} class="input" />}
-{textArea && <textarea class="input h-full" placeholder={placeholder} />}
+{
+  !textArea && (
+    <input type={type} placeholder={placeholder} class="input" name={name} />
+  )
+}
+{
+  textArea && (
+    <textarea class="input h-full" placeholder={placeholder} name={name} />
+  )
+}
 
 <style>
   .input {

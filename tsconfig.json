@@ -26,6 +26,9 @@
       "@scripts/*": [
         "src/scripts/*"
       ],
+      "@api/*": [
+        "src/api/*"
+      ],
       "@fonts/*": [
         "public/fonts/*"
       ],

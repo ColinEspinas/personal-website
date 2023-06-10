@@ -1,18 +1,36 @@
 ---
 import { Icon } from "astro-icon";
 
+const enableThemes = import.meta.env.PUBLIC_FLAG_THEMES === "true";
+const enableBlog = import.meta.env.PUBLIC_FLAG_BLOG === "true";
+
 const links = [
   { name: "Home", icon: "ph:house", to: "/" },
   { name: "About", icon: "ph:hand-waving", to: "/about" },
   { name: "Work", icon: "ph:briefcase", to: "/work" },
-  { name: "Writings", icon: "ph:newspaper", to: "/writings" },
   { name: "Contact", icon: "ph:at", to: "/contact" },
 ];
 
-const actions = [
-  // { id: "commands", name: "Search and more", icon: "ph:magnifying-glass" },
-  // { id: "theme-switch", name: "Switch light/dark mode", icon: "ph:moon" },
-];
+if (enableBlog) {
+  links.splice(3, 0, {
+    name: "Writings",
+    icon: "ph:newspaper",
+    to: "/writings",
+  });
+}
+
+// const actions = [
+//   { id: "commands", name: "Search and more", icon: "ph:magnifying-glass" },
+//   { id: "theme-switch", name: "Switch light/dark mode", icon: "ph:moon" },
+// ];
+
+// if (enableThemes) {
+//   actions.push({
+//     id: "theme-switch",
+//     name: "Switch light/dark mode",
+//     icon: "ph:moon",
+//   });
+// }
 
 const currentPath = "/" + Astro.url.pathname.split("/")[1] || "/";
 let activeIndex = links.findIndex((link) => currentPath === link.to);
@@ -43,7 +61,8 @@ activeIndex = activeIndex > 0 ? activeIndex : 0;
       ))
     }
   </ul>
-  <ul class="hidden sm:flex lg:flex-col gap-2 p-2">
+
+  <!-- <ul class="hidden sm:flex lg:flex-col gap-2 p-2">
     {
       actions.map((action) => (
         <li
@@ -60,16 +79,18 @@ activeIndex = activeIndex > 0 ? activeIndex : 0;
         </li>
       ))
     }
-  </ul>
+  </ul> -->
 </nav>
 
 <script>
-  // import { toggleDarkMode, isDarkModeActive } from "@scripts/theme";
   import swup from "@scripts/swup";
+  import { toggleDarkMode, isDarkModeActive } from "@scripts/theme";
 
-  // document.getElementById("theme-switch").addEventListener("click", () => {
-  //   toggleDarkMode();
-  // });
+  if (import.meta.env.PUBLIC_FLAG_THEMES === "true") {
+    document.getElementById("theme-switch").addEventListener("click", () => {
+      toggleDarkMode();
+    });
+  }
 
   const navItems = document.querySelectorAll(".navigation .item");
   const navLinkList = document.querySelector(
@@ -103,9 +124,10 @@ activeIndex = activeIndex > 0 ? activeIndex : 0;
 <style define:vars={{ activeIndex }}>
   .navigation {
     @apply fixed bottom-4 left-0 mx-4 z-10;
-    width: calc(100% - theme("spacing.6"));
+    @apply w-[calc(100%-theme("spacing.6"))];
     @apply flex justify-center gap-2;
-    @apply lg:top-1/2 lg:bottom-auto lg:left-4 lg:-translate-y-1/2;
+    @apply lg:bottom-auto lg:left-4;
+    @apply lg:top-1/2 lg:-translate-y-1/2;
     @apply lg:min-h-[600px] lg:w-auto;
     @apply lg:flex-col sm:justify-between;
     @apply bg-light shadow-border rounded;
@@ -144,7 +166,8 @@ activeIndex = activeIndex > 0 ? activeIndex : 0;
     @apply -translate-x-1/2 translate-y-2;
     @apply lg:-translate-x-2 lg:-translate-y-1/2;
     content: attr(data-name);
-    @apply py-2 px-3 mb-4 lg:ml-4 lg:mb-0 border-2 border-primary-2 rounded;
+    @apply py-2 px-3 mb-4 border-2 border-primary-2 rounded;
+    @apply lg:ml-4 lg:mb-0;
     color: theme("colors.primary");
     background-color: theme("backgroundColor.light");
     font-weight: theme("fontWeight.medium");
@@ -155,7 +178,7 @@ activeIndex = activeIndex > 0 ? activeIndex : 0;
 
   .item:hover::after {
     opacity: 1;
-    @apply lg:-translate-x-1/2 translate-y-0;
+    @apply translate-y-0;
     @apply lg:translate-x-0 lg:-translate-y-1/2;
   }
 

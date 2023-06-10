@@ -2,12 +2,17 @@
 import ActionButton from "../atoms/ActionButton.astro";
 import LinkButton from "../atoms/LinkButton.astro";
 
+const enableThemes = import.meta.env.PUBLIC_FLAG_THEMES === "true";
+const enableBlog = import.meta.env.PUBLIC_FLAG_BLOG === "true";
+
 const links = [
   [
     { name: "Home", to: "/" },
     { name: "About", to: "/about" },
     { name: "Work", to: "/work" },
-    { name: "Writings", to: "/writings" },
+    enableBlog
+      ? { name: "Writings", to: "/writings" }
+      : { name: "Contact", to: "/contact" },
   ],
   [
     { name: "Github", to: "https://github.com/ColinEspinas", target: "_blank" },
@@ -20,10 +25,10 @@ const links = [
     },
   ],
   [
-    { name: "RSS", to: "/" },
-    { name: "Roadmap", to: "/" },
-    { name: "Statistics", to: "/" },
-    { name: "Contact", to: "/contact" },
+    // { name: "RSS", to: "/" },
+    // { name: "Roadmap", to: "/" },
+    // { name: "Statistics", to: "/" },
+    // { name: "Contact", to: "/contact" },
   ],
 ];
 
@@ -39,30 +44,43 @@ const currentYear = new Date().getFullYear();
     {
       links.map((col) => (
         <ul class="flex flex-col gap-2 leading-inter-compact">
-          {col.map((link) => (
-            <li class="font-medium text-primary opacity-80 transition-opacity hover:opacity-100">
-              <a
-                href={link.to}
-                target={link.target}
-                data-swup-preload={link.target !== "_blank"}
-              >
-                {link.name}
-              </a>
-            </li>
-          ))}
+          {col.map(
+            (link) =>
+              link && (
+                <li class="font-medium text-primary opacity-80 transition-opacity hover:opacity-100">
+                  <a
+                    href={link.to}
+                    target={link.target}
+                    data-swup-preload={link.target !== "_blank"}
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              )
+          )}
         </ul>
       ))
     }
     <div class="flex flex-col gap-2">
-      <ActionButton
-        id="footer-theme-switch"
+      {
+        enableThemes && (
+          <ActionButton
+            id="footer-theme-switch"
+            type="secondary"
+            icon="ph:sun-bold"
+            iconBeforeText
+          >
+            <span id="theme-state">Mode: Light</span>
+          </ActionButton>
+        )
+      }
+      <LinkButton
+        to="#"
         type="secondary"
-        icon="ph:sun-bold"
+        icon="ph:arrow-up-bold"
         iconBeforeText
-        ><span id="theme-state">Mode: Light</span>
-      </ActionButton>
-      <LinkButton to="#" type="secondary" icon="ph:arrow-up-bold" iconBeforeText
-        >Go back up
+      >
+        Go back up
       </LinkButton>
     </div>
     <p
@@ -77,12 +95,14 @@ const currentYear = new Date().getFullYear();
 <script>
   import { toggleDarkMode, isDarkModeActive } from "@scripts/theme";
 
-  document
-    .getElementById("footer-theme-switch")
-    .addEventListener("click", () => {
-      toggleDarkMode();
-      document.getElementById("theme-state").textContent = `Mode: ${
-        isDarkModeActive() ? "Dark" : "Light"
-      }`;
-    });
+  if (import.meta.env.PUBLIC_FLAG_THEMES === "true") {
+    document
+      .getElementById("footer-theme-switch")
+      .addEventListener("click", () => {
+        toggleDarkMode();
+        document.getElementById("theme-state").textContent = `Mode: ${
+          isDarkModeActive() ? "Dark" : "Light"
+        }`;
+      });
+  }
 </script>

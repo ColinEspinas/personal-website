@@ -5,6 +5,8 @@ import Section from "@components/app/atoms/Section.astro";
 import ProjectList from "@components/app/molecules/ProjectList.astro";
 import WritingList from "@components/app/molecules/WritingList.astro";
 import HomeWavyText from "@components/app/molecules/HomeWavyText.svelte";
+
+const enableBlog = import.meta.env.PUBLIC_FLAG_BLOG === "true";
 ---
 
 <Layout>
@@ -19,24 +21,32 @@ import HomeWavyText from "@components/app/molecules/HomeWavyText.svelte";
       and <strong>beautiful</strong>.
     </p>
 
-    <LinkButton to="/about" icon="ph:arrow-right-bold" size="big"
-      >Learn more about me
+    <LinkButton to="/about" icon="ph:arrow-right-bold" size="big">
+      Learn more about me
     </LinkButton>
   </header>
 
   <div class="flex flex-col gap-7">
     <Section title="Latest projects">
       <ProjectList />
-      <LinkButton to="/work" type="secondary" icon="ph:arrow-right-bold"
-        >See more
+      <LinkButton to="/work" type="secondary" icon="ph:arrow-right-bold">
+        See more
       </LinkButton>
     </Section>
-    <Section title="Featured writings">
-      <WritingList featured />
-      <LinkButton to="/writings" type="secondary" icon="ph:arrow-right-bold"
-        >Read all writings
-      </LinkButton>
-    </Section>
+    {
+      enableBlog && (
+        <Section title="Featured writings">
+          <WritingList featured />
+          <LinkButton
+            to="/writings"
+            type="secondary"
+            icon="ph:arrow-right-bold"
+          >
+            Read all writings
+          </LinkButton>
+        </Section>
+      )
+    }
   </div>
 </Layout>
 
